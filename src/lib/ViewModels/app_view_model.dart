@@ -1,10 +1,11 @@
+import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
+import 'package:muslim_life_mosque_edition/Services/app_data_service.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:stacked/stacked.dart';
 
 class AppViewModel extends BaseViewModel {
   late AppApiService appApiService;
   late AppSettingService appSettingsService;
-  late AppDatabaseService appDatabaseService;
   late AppDataService appDataService;
 
   String Title = "";
@@ -18,7 +19,6 @@ class AppViewModel extends BaseViewModel {
   AppViewModel() {
     appApiService = AppApiService();
     appSettingsService = AppSettingService();
-    appDatabaseService = AppDatabaseService();
     appDataService = AppDataService();
   }
 
