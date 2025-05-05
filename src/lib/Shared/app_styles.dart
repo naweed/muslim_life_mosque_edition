@@ -4,7 +4,7 @@ import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 class AppStyles {
   // Text Styles
 
-  // //Regular Light Text Styles
+  //Regular Light Text Styles
   // static const TextStyle RegularLight10TextStyle = TextStyle(
   //   fontFamily: "RegularFont",
   //   color: AppColors.LightTextColor,
@@ -25,13 +25,13 @@ class AppStyles {
   //   color: AppColors.LightTextColor,
   //   fontSize: 14,
   // );
-  // static const TextStyle RegularLight16TextStyle = TextStyle(
-  //   fontFamily: "RegularFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 16,
-  // );
+  static const TextStyle RegularLight16TextStyle = TextStyle(
+    fontFamily: "RegularFont",
+    color: AppColors.LightTextColor,
+    fontSize: 16,
+  );
 
-  // //Regular Dark Text Styles
+  //Regular Dark Text Styles
   // static const TextStyle RegularDark8TextStyle = TextStyle(
   //   fontFamily: "RegularFont",
   //   color: AppColors.DarkTextColor,
@@ -52,13 +52,13 @@ class AppStyles {
   //   color: AppColors.DarkTextColor,
   //   fontSize: 14,
   // );
-  // static const TextStyle RegularDark16TextStyle = TextStyle(
-  //   fontFamily: "RegularFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 16,
-  // );
+  static const TextStyle RegularDark16TextStyle = TextStyle(
+    fontFamily: "RegularFont",
+    color: AppColors.DarkTextColor,
+    fontSize: 16,
+  );
 
-  // //Medium Light Text Styles
+  //Medium Light Text Styles
   // static const TextStyle MediumLight10TextStyle = TextStyle(
   //   fontFamily: "MediumFont",
   //   color: AppColors.LightTextColor,
@@ -84,11 +84,11 @@ class AppStyles {
   //   color: AppColors.LightTextColor,
   //   fontSize: 22,
   // );
-  // static const TextStyle MediumLight24TextStyle = TextStyle(
-  //   fontFamily: "MediumFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 24,
-  // );
+  static const TextStyle MediumLight24TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor,
+    fontSize: 24,
+  );
 
   // //Medium Dark Text Styles
   // static const TextStyle MediumDark10TextStyle = TextStyle(
@@ -231,17 +231,17 @@ class AppStyles {
   //   color: AppColors.LightTextColor,
   //   fontSize: 16,
   // );
-  // static const TextStyle IndicatorTextStyle = TextStyle(
-  //   fontFamily: "ExtraLightFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 14,
-  //   height: 1.25,
-  // );
-  // static const TextStyle IndicatorHeaderTextStyle = TextStyle(
-  //   fontFamily: "RegularFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 18,
-  // );
+  static const TextStyle IndicatorTextStyle = TextStyle(
+    fontFamily: "ExtraLightFont",
+    color: AppColors.DarkTextColor,
+    fontSize: 18,
+    height: 1.25,
+  );
+  static const TextStyle IndicatorHeaderTextStyle = TextStyle(
+    fontFamily: "RegularFont",
+    color: AppColors.DarkTextColor,
+    fontSize: 24,
+  );
   static const TextStyle OnboardingTitleTextStyle = TextStyle(
     fontFamily: "BoldFont",
     color: AppColors.LightTextColor,
@@ -264,33 +264,33 @@ class AppStyles {
   //   fontSize: 12,
   // );
 
-  // static const TextStyle PageButtonTextStyle = TextStyle(
-  //   fontFamily: "MediumFont",
-  //   color: AppColors.ButtonTextColor,
-  //   fontSize: 18,
-  // );
-  // static const TextStyle LinkButtonTextStyle = TextStyle(
-  //   fontFamily: "MediumFont",
-  //   color: AppColors.LinkButtonTextColor,
-  //   fontSize: 16,
-  // );
+  static const TextStyle PageButtonTextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.ButtonTextColor,
+    fontSize: 22,
+  );
+  static const TextStyle LinkButtonTextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LinkButtonTextColor,
+    fontSize: 18,
+  );
 
-  // // Button Styles
-  // static ButtonStyle PageButtonStyle = ElevatedButton.styleFrom(
-  //   backgroundColor: AppColors.ButtonBackgroundColor,
-  //   side: BorderSide.none,
-  //   shape: const StadiumBorder(),
-  //   elevation: 0,
-  // );
-  // static ButtonStyle DisabledPageButtonStyle = ElevatedButton.styleFrom(
-  //   backgroundColor: AppColors.ButtonBackgroundColor.withValues(alpha: 0.5),
-  //   side: BorderSide.none,
-  //   shape: const StadiumBorder(),
-  //   elevation: 0,
-  // );
-  // static ButtonStyle LinkButtonStyle = ElevatedButton.styleFrom(
-  //   backgroundColor: Colors.transparent,
-  //   side: BorderSide.none,
-  //   elevation: 0,
-  // );
+  // Button Styles
+  static ButtonStyle PageButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.ButtonBackgroundColor,
+    side: BorderSide.none,
+    shape: const StadiumBorder(),
+    elevation: 0,
+  );
+  static ButtonStyle DisabledPageButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.ButtonBackgroundColor.withValues(alpha: 0.5),
+    side: BorderSide.none,
+    shape: const StadiumBorder(),
+    elevation: 0,
+  );
+  static ButtonStyle LinkButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: Colors.transparent,
+    side: BorderSide.none,
+    elevation: 0,
+  );
 }
