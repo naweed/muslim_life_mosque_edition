@@ -15,7 +15,7 @@ class OnboardingContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: (44, 0, 44, 36).withLTRBPadding(),
+      padding: (144, 0, 144, 36).withLTRBPadding(),
       width: double.infinity,
       height: double.infinity,
       color: model.backgroundColor.toColor(),
@@ -33,7 +33,7 @@ class OnboardingContentWidget extends StatelessWidget {
                 Text(
                   model.description,
                   style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ).expandWidget(flex: 2),

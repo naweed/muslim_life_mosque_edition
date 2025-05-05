@@ -12,13 +12,13 @@ class OnboardingContent {
     OnboardingContent(
       AppAssets.OnboardingScreen1,
       "Prayer Timings",
-      "Never miss a prayer! Get accurate, location-based prayer times and gentle reminders to keep you connected with Allah, wherever you are.",
+      "Get accurate, location-based prayer times, wherever you are. Customise calculation models to suit your needs.",
       "#33A32E",
     ),
     OnboardingContent(
       AppAssets.OnboardingScreen4,
       "Data Privacy",
-      "Your personal data stays on your device. We do not collect any information or share your data with third parties, ensuring you peace of mind. We will not clutter your screen with ads, and the app will remain free forever.",
+      "We do not collect any information or share your data with third parties, ensuring you peace of mind. We will not clutter your screen with ads, and the app will remain free forever.",
       "#33A32E",
     ),
   ];

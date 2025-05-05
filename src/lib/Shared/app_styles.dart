@@ -245,12 +245,12 @@ class AppStyles {
   static const TextStyle OnboardingTitleTextStyle = TextStyle(
     fontFamily: "BoldFont",
     color: AppColors.LightTextColor,
-    fontSize: 30,
+    fontSize: 40,
   );
   static const TextStyle OnboardingSubTitleTextStyle = TextStyle(
     fontFamily: "RegularFont",
     color: AppColors.LightTextColor,
-    fontSize: 16,
+    fontSize: 20,
   );
 
   // static const TextStyle UnselectedTabLabelStyle = TextStyle(
