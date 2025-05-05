@@ -23,6 +23,7 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   input_quantity: ^2.5.1
   carousel_slider: ^5.0.0
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
