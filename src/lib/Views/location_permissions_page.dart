@@ -29,64 +29,46 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
 
   @override
   Widget builder(BuildContext context, LocationPermissionPageViewModel viewModel, Widget? child) => Scaffold(
-    body: Stack(
-      children: [
-        // Permission Icon
-        Container(
-          padding: (84, 0, 84, 36).withLTRBPadding(),
-          width: double.infinity,
-          height: double.infinity,
-          color: AppColors.AppPrimaryColor,
-          child: SizedBox(
-            height: context.height * 0.8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(AppAssets.OnboardingLocationPermission, height: context.height * 0.4).expandWidget(flex: 2),
-                Column(
-                  children: [
-                    Text(viewModel.Title, style: AppStyles.OnboardingTitleTextStyle),
-                    4.toVerticalSpacer(),
-                    Text(
-                      viewModel.Description,
-                      style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ).expandWidget(flex: 2),
-              ],
-            ),
-          ),
-        ),
-
-        // Permission buttons
-        Container(
-          width: double.infinity,
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: (84, 0, 84, 28).withLTRBPadding(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                PageButton(
-                  text: viewModel.ButtonText,
-                  isEnabled: viewModel.isButtonEnabled,
-                  onPressed: () async => await viewModel.onLocateMePressed(context),
-                ),
-                4.toVerticalSpacer(),
-                LinkButton(
-                  text: "Skip! I will choose my city",
-                  onPressed: () {
-                    // Navigate to Contry Selection Page
-                    context.pushReplacement(CountrySelectionPage());
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
+    body: Container(
+      padding: (48, 48, 48, 48).withLTRBPadding(),
+      width: double.infinity,
+      height: double.infinity,
+      color: AppColors.AppPrimaryColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset(AppAssets.OnboardingLocationPermission, width: context.width * 0.3),
+          48.toHorizontalSpacer(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(viewModel.Title, style: AppStyles.OnboardingTitleTextStyle),
+              8.toVerticalSpacer(),
+              Text(
+                viewModel.Description,
+                style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
+                textAlign: TextAlign.center,
+              ),
+              64.toVerticalSpacer(),
+              PageButton(
+                text: viewModel.ButtonText,
+                isEnabled: viewModel.isButtonEnabled,
+                onPressed: () async => await viewModel.onLocateMePressed(context),
+              ),
+              2.toVerticalSpacer(),
+              LinkButton(
+                text: "Skip! I will choose my city",
+                onPressed: () {
+                  // Navigate to Contry Selection Page
+                  context.pushReplacement(CountrySelectionPage());
+                },
+              ),
+            ],
+          ).expandWidget(),
+        ],
+      ),
     ),
   );
 }
