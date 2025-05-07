@@ -25,3 +25,9 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
