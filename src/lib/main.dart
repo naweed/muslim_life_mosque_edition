@@ -11,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final appSettingsService = AppSettingService();
+  //await appSettingsService.clearAllPreferences();
 
   await AppSession.setAppParameters(appSettingsService);
 

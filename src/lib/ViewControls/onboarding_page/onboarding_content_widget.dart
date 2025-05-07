@@ -15,28 +15,31 @@ class OnboardingContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: (144, 0, 144, 36).withLTRBPadding(),
+      padding: (48, 48, 48, 48).withLTRBPadding(),
       width: double.infinity,
       height: double.infinity,
       color: model.backgroundColor.toColor(),
       child: SizedBox(
         height: context.height * 0.7,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(model.image, height: context.height * 0.4).expandWidget(flex: 3),
+            Image.asset(model.image, width: context.width * 0.3),
+            48.toHorizontalSpacer(),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(model.title, style: AppStyles.OnboardingTitleTextStyle, textAlign: TextAlign.center),
-                12.toVerticalSpacer(),
+                8.toVerticalSpacer(),
                 Text(
                   model.description,
                   style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
                   textAlign: TextAlign.center,
                 ),
               ],
-            ).expandWidget(flex: 2),
+            ).expandWidget(),
           ],
         ),
       ),
