@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:muslim_life_mosque_edition/Framework/Extensions/device_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/sized_box_extensions.dart';
+import 'package:muslim_life_mosque_edition/Framework/Extensions/widget_extensions.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_assets.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
@@ -50,60 +51,48 @@ class CitySelectionPage extends StackedView<CitySelectionPageViewModel> {
     //Show UI
     if (viewModel.DataLoaded) {
       return Container(
-        padding: (44, 0, 44, 0).withLTRBPadding(),
+        padding: (48, 48, 48, 48).withLTRBPadding(),
         width: double.infinity,
         height: double.infinity,
-        child: Stack(
+        color: AppColors.AppPrimaryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CustomScrollView(
-              scrollDirection: Axis.vertical,
-              slivers: [
-                //Page Header
-                SliverAppBar(
-                  //Back Icon
-                  leadingWidth: 56 - 16,
-                  leading: GestureDetector(
-                    onTap: () => context.popPage(),
-                    child: Container(padding: 6.withAllPadding(), child: SvgPicture.asset(AppAssets.BackIcon)),
+            Image.asset(AppAssets.CityImage, width: context.width * 0.3, opacity: const AlwaysStoppedAnimation(.8)),
+            48.toHorizontalSpacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text("Select your City!", style: AppStyles.MediumLight24TextStyle),
+                8.toVerticalSpacer(),
+                Container(
+                  padding: 8.withAllPadding(),
+                  height: 57,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.TextboxBackgroundColor,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  backgroundColor: AppColors.AppPrimaryColor,
-                  surfaceTintColor: Colors.transparent,
-                  elevation: 0,
-                  pinned: true,
-                  centerTitle: true,
-                  bottom: PreferredSize(
-                    // Add this code
-                    preferredSize: Size.fromHeight(76.0), // Add this code
-                    child: Container(
-                      padding: 8.withAllPadding(),
-                      height: 57,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.TextboxBackgroundColor,
-                        borderRadius: BorderRadius.circular(8),
+                  child: TextField(
+                    onChanged: (text) => viewModel.OnCitySearchTextChanged(),
+                    controller: viewModel.CitySearchController,
+                    style: AppStyles.RegularDark16TextStyle,
+                    decoration: InputDecoration(
+                      filled: true,
+                      contentPadding: (12, 0, 12, 6).withLTRBPadding(),
+                      hintStyle: AppStyles.RegularDark16TextStyle.copyWith(
+                        color: AppColors.DarkGrayColor.withValues(alpha: 0.7),
                       ),
-                      child: TextField(
-                        onChanged: (text) => viewModel.OnCitySearchTextChanged(),
-                        controller: viewModel.CitySearchController,
-                        style: AppStyles.RegularDark16TextStyle,
-                        decoration: InputDecoration(
-                          filled: true,
-                          contentPadding: (12, 0, 12, 6).withLTRBPadding(),
-                          hintStyle: AppStyles.RegularDark16TextStyle.copyWith(
-                            color: AppColors.DarkGrayColor.withValues(alpha: 0.7),
-                          ),
-                          hintText: "Search for your city...",
-                          border: InputBorder.none,
-                          fillColor: Colors.transparent,
-                        ),
-                      ),
-                    ).withLTRBPadding(0, 0, 0, 12),
+                      hintText: "Search for your city...",
+                      border: InputBorder.none,
+                      fillColor: Colors.transparent,
+                    ),
                   ),
-                  title: const Text("Select your City!", style: AppStyles.MediumLight24TextStyle),
                 ),
-
-                //Countries List
-                SuperSliverList.separated(
+                12.toVerticalSpacer(),
+                SuperListView.separated(
                   itemCount: viewModel.Cities.length,
                   itemBuilder: (context, index) {
                     final city = viewModel.Cities[index];
@@ -115,43 +104,30 @@ class CitySelectionPage extends StackedView<CitySelectionPageViewModel> {
                     );
                   },
                   separatorBuilder: (context, index) => 12.toVerticalSpacer(),
+                ).expandWidget(),
+                12.toVerticalSpacer(),
+                PageButton(
+                  isEnabled: viewModel.SelectedCity != "",
+                  text: "Next",
+                  onPressed: () async {
+                    //Save My Location
+                    await viewModel.saveMyLocation();
+
+                    //Save Prayer and Asr Methods
+                    await viewModel.saveCalculationMethods();
+
+                    //Save Location Permission Status
+                    await viewModel.saveLocationPermissionStatus();
+
+                    //Save Manual Adjustments
+                    await viewModel.saveManualAdjustments();
+
+                    // Navigate to Start Page
+                    context.pushReplacement(StartPage());
+                  },
                 ),
               ],
-            ).withLTRBPadding(0, 0, 0, 96),
-
-            // Next button
-            Container(
-              width: double.infinity,
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: (0, 0, 0, 28).withLTRBPadding(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    PageButton(
-                      isEnabled: viewModel.SelectedCity != "",
-                      text: "Next",
-                      onPressed: () async {
-                        //Save My Location
-                        await viewModel.saveMyLocation();
-
-                        //Save Prayer and Asr Methods
-                        await viewModel.saveCalculationMethods();
-
-                        //Save Location Permission Status
-                        await viewModel.saveLocationPermissionStatus();
-
-                        //Save Manual Adjustments
-                        await viewModel.saveManualAdjustments();
-
-                        // Navigate to Start Page
-                        context.pushReplacement(StartPage());
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ).expandWidget(),
           ],
         ),
       );

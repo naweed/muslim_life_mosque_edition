@@ -8,9 +8,9 @@ import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 
 class LocationPermissionPageViewModel extends AppViewModel {
   String Description =
-      "We need to know your location in order to find accurate prayer times. We promise that we will not use this location for any other purpose.";
+      "We need to know your location in order to find accurate prayer times. We promise that we will not use your location for any other purpose.";
 
-  String ButtonText = "Locate Me";
+  String ButtonText = "Continue";
 
   bool isButtonEnabled = true;
 
@@ -77,7 +77,11 @@ class LocationPermissionPageViewModel extends AppViewModel {
       double userLat = 0.0;
       double userLon = 0.0;
 
-      (userLat, userLon) = await LocationHelpers.getLocationCoordinates();
+      try {
+        (userLat, userLon) = await LocationHelpers.getLocationCoordinates();
+      }
+      // ignore: empty_catches
+      catch (exLoc) {}
 
       await saveLocationCoordinates(userLat, userLon);
 

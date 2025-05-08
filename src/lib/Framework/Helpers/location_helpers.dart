@@ -38,14 +38,12 @@ class LocationHelpers {
 
   static Future<(double, double)> getLocationCoordinates() async {
     if (await requestLocationermissions()) {
-      if (await Geolocator.isLocationServiceEnabled()) {
-        var permission = await Geolocator.checkPermission();
+      var permission = await Geolocator.checkPermission();
 
-        if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
-          var coordinates = await Geolocator.getCurrentPosition();
+      if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+        var coordinates = await Geolocator.getLastKnownPosition();
 
-          return (coordinates.latitude, coordinates.longitude);
-        }
+        return (coordinates!.latitude, coordinates.longitude);
       }
     }
 

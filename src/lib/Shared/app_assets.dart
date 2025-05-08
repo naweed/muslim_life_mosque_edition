@@ -30,4 +30,6 @@ class AppAssets {
   static const String OnboardingScreen1 = "${AppConstants.LocalImagesPath}/ob_1.png";
   static const String OnboardingScreen4 = "${AppConstants.LocalImagesPath}/ob_4.png";
   static const String OnboardingLocationPermission = "${AppConstants.LocalImagesPath}/ob_location_permission.png";
+  static const String CountryImage = "${AppConstants.LocalImagesPath}/icn_country.png";
+  static const String CityImage = "${AppConstants.LocalImagesPath}/icn_city.png";
 }

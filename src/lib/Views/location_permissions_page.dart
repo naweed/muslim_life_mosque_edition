@@ -7,7 +7,6 @@ import 'package:muslim_life_mosque_edition/Framework/Extensions/widget_extension
 import 'package:muslim_life_mosque_edition/Shared/app_assets.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
-import 'package:muslim_life_mosque_edition/ViewControls/shared/link_button.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/page_button.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/location_permissions_page_view_model.dart';
 import 'package:muslim_life_mosque_edition/Views/country_selection_page.dart';
@@ -55,15 +54,7 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
               PageButton(
                 text: viewModel.ButtonText,
                 isEnabled: viewModel.isButtonEnabled,
-                onPressed: () async => await viewModel.onLocateMePressed(context),
-              ),
-              2.toVerticalSpacer(),
-              LinkButton(
-                text: "Skip! I will choose my city",
-                onPressed: () {
-                  // Navigate to Contry Selection Page
-                  context.pushReplacement(CountrySelectionPage());
-                },
+                onPressed: () async => await context.pushReplacement(CountrySelectionPage()),
               ),
             ],
           ).expandWidget(),
