@@ -1,10 +1,8 @@
-import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/Services/app_data_service.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:stacked/stacked.dart';
 
 class AppViewModel extends BaseViewModel {
-  late AppApiService appApiService;
   late AppSettingService appSettingsService;
   late AppDataService appDataService;
 
@@ -17,7 +15,6 @@ class AppViewModel extends BaseViewModel {
   String ErrorImage = "";
 
   AppViewModel() {
-    appApiService = AppApiService();
     appSettingsService = AppSettingService();
     appDataService = AppDataService();
   }

@@ -1,10 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
-import 'package:muslim_life_mosque_edition/Framework/Helpers/location_helpers.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
-import 'package:muslim_life_mosque_edition/Views/country_selection_page.dart';
-import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 
 class LocationPermissionPageViewModel extends AppViewModel {
   String Description =
@@ -15,7 +10,7 @@ class LocationPermissionPageViewModel extends AppViewModel {
   bool isButtonEnabled = true;
 
   LocationPermissionPageViewModel() : super() {
-    this.Title = "Location Access!";
+    Title = "Location Access!";
   }
 
   Future<void> saveMyLocation(String myLocation) async {
@@ -58,59 +53,5 @@ class LocationPermissionPageViewModel extends AppViewModel {
 
     AppSession.PrayerCalculationMethod = prayerCalcMethod;
     AppSession.AsrCalculationMethod = asrCalcMethod;
-  }
-
-  Future<void> onLocateMePressed(BuildContext context) async {
-    ButtonText = "Locating you ...";
-    isButtonEnabled = false;
-    rebuildUi();
-
-    // Get Location Permissions
-    await LocationHelpers.requestLocationermissions();
-
-    //Check Location Permissions
-    if (await LocationHelpers.locationermissionsGranted()) {
-      //Save Location Permission Status
-      await saveLocationPermissionStatus();
-
-      //Get User Location and Save Coordibates
-      double userLat = 0.0;
-      double userLon = 0.0;
-
-      try {
-        (userLat, userLon) = await LocationHelpers.getLocationCoordinates();
-      }
-      // ignore: empty_catches
-      catch (exLoc) {}
-
-      await saveLocationCoordinates(userLat, userLon);
-
-      //Save Manua Adjustments
-      await saveManualAdjustments();
-
-      //Get Save My Location
-      try {
-        var myCity = await appApiService.getUserCity(userLat, userLon);
-        await saveMyLocation(myCity.name!);
-
-        try {
-          var allCountries = await appDataService.getAllCountries();
-          var country = allCountries.where((cntry) => cntry.id == myCity.countryCode!).first;
-
-          await savePrayerMethods(country.pCalc!, country.asrCalc!);
-        } catch (ex) {
-          await savePrayerMethods("Muslim World League", "Shafi");
-        }
-      } catch (ex) {
-        await saveMyLocation("My Location");
-        await savePrayerMethods("Muslim World League", "Shafi");
-      }
-
-      // Navigate to Start Page
-      context.pushReplacement(StartPage());
-    } else {
-      // Navigate to Contry Selection Page
-      context.pushReplacement(CountrySelectionPage());
-    }
   }
 }
