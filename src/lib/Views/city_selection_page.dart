@@ -85,7 +85,7 @@ class CitySelectionPage extends StackedView<CitySelectionPageViewModel> {
                       hintStyle: AppStyles.RegularDark16TextStyle.copyWith(
                         color: AppColors.DarkGrayColor.withValues(alpha: 0.7),
                       ),
-                      hintText: "Search for your city...",
+                      hintText: "Search for your nearest city...",
                       border: InputBorder.none,
                       fillColor: Colors.transparent,
                     ),
