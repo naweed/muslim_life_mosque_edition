@@ -86,7 +86,7 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
                       focusNode: viewModel.nextButtonFocus,
                       canRequestFocus: true,
                       child: Container(
-                        padding: 16.withAllPadding(),
+                        padding: 8.withAllPadding(),
                         decoration: BoxDecoration(
                           border: Border.all(color: AppColors.LightIndicatorColor.withValues(alpha: 0.8), width: 1.5),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),

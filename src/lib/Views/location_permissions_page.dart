@@ -51,10 +51,17 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
                 textAlign: TextAlign.center,
               ),
               64.toVerticalSpacer(),
-              PageButton(
-                text: viewModel.ButtonText,
-                isEnabled: viewModel.isButtonEnabled,
-                onPressed: () async => await context.pushReplacement(CountrySelectionPage()),
+              Container(
+                padding: 8.withAllPadding(),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.LightIndicatorColor.withValues(alpha: 0.8), width: 1.5),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: PageButton(
+                  text: viewModel.ButtonText,
+                  isEnabled: viewModel.isButtonEnabled,
+                  onPressed: () async => await context.pushReplacement(CountrySelectionPage()),
+                ),
               ),
             ],
           ).expandWidget(),
