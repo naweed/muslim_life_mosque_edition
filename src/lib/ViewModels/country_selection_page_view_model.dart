@@ -28,12 +28,6 @@ class CountrySelectionPageViewModel extends AppViewModel {
     }
   }
 
-  Future<void> OnCountrySearchTextChanged() async {
-    Countries = _getCountries();
-    SelectedCountry = "";
-    rebuildUi();
-  }
-
   List<Country> _getCountries() {
     if (CountrySearchController.text.isEmpty) {
       return _allCountries;

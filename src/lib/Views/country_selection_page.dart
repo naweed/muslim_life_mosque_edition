@@ -48,31 +48,6 @@ class CountrySelectionPage extends StackedView<CountrySelectionPageViewModel> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text("Select your Country!", style: AppStyles.MediumLight24TextStyle),
-              8.toVerticalSpacer(),
-              Container(
-                padding: 8.withAllPadding(),
-                height: 57,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.TextboxBackgroundColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: TextField(
-                  onChanged: (text) => viewModel.OnCountrySearchTextChanged(),
-                  controller: viewModel.CountrySearchController,
-                  style: AppStyles.RegularDark16TextStyle,
-                  decoration: InputDecoration(
-                    filled: true,
-                    contentPadding: (12, 0, 12, 6).withLTRBPadding(),
-                    hintStyle: AppStyles.RegularDark16TextStyle.copyWith(
-                      color: AppColors.DarkGrayColor.withValues(alpha: 0.7),
-                    ),
-                    hintText: "Search for your country...",
-                    border: InputBorder.none,
-                    fillColor: Colors.transparent,
-                  ),
-                ),
-              ),
               12.toVerticalSpacer(),
               SuperListView.separated(
                 itemCount: viewModel.Countries.length,

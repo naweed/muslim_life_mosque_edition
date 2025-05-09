@@ -37,12 +37,6 @@ class CitySelectionPageViewModel extends AppViewModel {
     }
   }
 
-  Future<void> OnCitySearchTextChanged() async {
-    Cities = _getCities();
-    SelectedCity = "";
-    rebuildUi();
-  }
-
   List<City> _getCities() {
     if (CitySearchController.text.isEmpty) {
       return _allCities;
