@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:muslim_life_mosque_edition/Actions/onboarding_page_next_button_action.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
+import 'package:muslim_life_mosque_edition/Intents/next_button_intent.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/onboarding_page/onboarding_content_widget.dart';
@@ -20,85 +23,86 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
 
   @override
   OnboardingPageViewModel viewModelBuilder(BuildContext context) {
-    pageViewModel = OnboardingPageViewModel();
+    pageViewModel = OnboardingPageViewModel(context);
     return pageViewModel;
   }
 
   @override
   void onViewModelReady(OnboardingPageViewModel viewModel) async {
+    viewModel.requestFocus();
     unawaited(viewModel.loadDataForCaching());
   }
 
   @override
   Widget builder(BuildContext context, OnboardingPageViewModel viewModel, Widget? child) => Scaffold(
     backgroundColor: AppColors.PageBackgroundColor,
-    body: Stack(
-      children: [
-        // Liquid Swipe Control
-        LiquidSwipe(
-          liquidController: viewModel.liquidController,
-          enableLoop: false,
-          disableUserGesture: true,
-          pages: viewModel.OnboardingScreens.map((screen) => OnboardingContentWidget(model: screen)).toList(),
-        ),
+    body: Shortcuts(
+      shortcuts: <LogicalKeySet, Intent>{LogicalKeySet(LogicalKeyboardKey.select): NextButtonIntent()},
+      child: Stack(
+        children: [
+          // Liquid Swipe Control
+          LiquidSwipe(
+            liquidController: viewModel.liquidController,
+            enableLoop: false,
+            disableUserGesture: true,
+            pages: viewModel.OnboardingScreens.map((screen) => OnboardingContentWidget(model: screen)).toList(),
+          ),
 
-        // Bottom Bar for indicator and Next buttons
-        Container(
-          width: double.infinity,
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: 36.withAllPadding(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Indicators
-                Row(
-                  children: List.generate(
-                    viewModel.OnboardingScreens.length,
-                    (index) => _buildDot(index, context, viewModel),
+          // Bottom Bar for indicator and Next buttons
+          Container(
+            width: double.infinity,
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: 36.withAllPadding(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Indicators
+                  Row(
+                    children: List.generate(
+                      viewModel.OnboardingScreens.length,
+                      (index) => _buildDot(index, context, viewModel),
+                    ),
                   ),
-                ),
-                // Next Onboarding screen button
-                CupertinoButton(
-                  padding: 0.withAllPadding(),
-                  onPressed: () async {
-                    if (viewModel.currentPage == viewModel.OnboardingScreens.length - 1) {
-                      //Save Onboarding Status
-                      await viewModel.saveOnboardingStatus();
+                  // Next Onboarding screen button
+                  Actions(
+                    actions: <Type, Action<Intent>>{
+                      NextButtonIntent: OnboardingPageNextButtonAction(viewModel, context),
+                    },
 
-                      // Navigate to Permissions screen
-                      await context.pushReplacement(LocationPermissionsPage());
-                      return;
-                    }
-
-                    // Go to next onboarding screen
-                    viewModel.currentPage++;
-                    viewModel.liquidController.animateToPage(page: viewModel.currentPage, duration: 0);
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        height: 55,
-                        width: 55,
-                        child: CircularProgressIndicator(
-                          backgroundColor: AppColors.LightIndicatorColor,
-                          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.DarkGreenColor),
-                          value: (viewModel.currentPage + 1) / viewModel.OnboardingScreens.length,
+                    child: Focus(
+                      focusNode: viewModel.nextButtonFocus,
+                      canRequestFocus: true,
+                      child: CupertinoButton(
+                        padding: 0.withAllPadding(),
+                        onPressed: () async {},
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SizedBox(
+                              height: 55,
+                              width: 55,
+                              child: CircularProgressIndicator(
+                                backgroundColor: AppColors.LightIndicatorColor,
+                                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.DarkGreenColor),
+                                value: (viewModel.currentPage + 1) / viewModel.OnboardingScreens.length,
+                              ),
+                            ),
+                            const CircleAvatar(
+                              backgroundColor: AppColors.DarkGreenColor,
+                              child: Icon(Icons.arrow_forward_ios_outlined, color: AppColors.LightIndicatorColor),
+                            ),
+                          ],
                         ),
                       ),
-                      const CircleAvatar(
-                        backgroundColor: AppColors.DarkGreenColor,
-                        child: Icon(Icons.arrow_forward_ios_outlined, color: AppColors.LightIndicatorColor),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 
