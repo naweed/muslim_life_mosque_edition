@@ -1,21 +1,111 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_life_mosque_edition/Models/city.dart';
-import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
 
 class CitySelectionPageViewModel extends AppViewModel {
+  late BuildContext screenContext;
+
+  final FocusNode nextButtonFocus = FocusNode();
+  final List<FocusNode> cityFocusNodes = [];
+
+  final ScrollController scrollController = ScrollController();
+  int _currentFocusIndex = 0;
+
   List<City> _allCities = [];
   List<City> Cities = [];
   String SelectedCity = "";
   double SelectedLatitude = 0.0;
   double SelectedLongitude = 0.0;
-
-  late TextEditingController CitySearchController;
+  late TextEditingController CountrySearchController;
 
   CitySelectionPageViewModel() : super() {
     this.Title = "City Selection";
-    CitySearchController = TextEditingController();
+  }
+
+  void requestFocus() async {
+    if (Cities.isNotEmpty) {
+      _currentFocusIndex = 0;
+
+      FocusScope.of(screenContext).requestFocus(cityFocusNodes[0]);
+      _scrollToFocusedItem();
+
+      rebuildUi();
+    }
+  }
+
+  void updateFocusNodes() {
+    // Clear existing focus nodes
+    for (var node in cityFocusNodes) {
+      node.dispose();
+    }
+
+    cityFocusNodes.clear();
+
+    // Create new focus nodes for each country
+    for (var _ in Cities) {
+      final node = FocusNode();
+
+      node.addListener(() {
+        if (node.hasFocus) {
+          _currentFocusIndex = cityFocusNodes.indexOf(node);
+          rebuildUi();
+        }
+      });
+
+      cityFocusNodes.add(node);
+    }
+
+    _currentFocusIndex = 0;
+  }
+
+  void focusNextButton() {
+    FocusScope.of(screenContext).requestFocus(nextButtonFocus);
+
+    rebuildUi();
+  }
+
+  void moveFocusUp() {
+    if (_currentFocusIndex > 0) {
+      _currentFocusIndex--;
+
+      FocusScope.of(screenContext).requestFocus(cityFocusNodes[_currentFocusIndex]);
+      _scrollToFocusedItem();
+
+      rebuildUi();
+    }
+  }
+
+  void moveFocusDown() {
+    if (_currentFocusIndex < Cities.length - 1) {
+      _currentFocusIndex++;
+
+      FocusScope.of(screenContext).requestFocus(cityFocusNodes[_currentFocusIndex]);
+      _scrollToFocusedItem();
+
+      rebuildUi();
+    }
+  }
+
+  bool isItemFocused(int index) {
+    return _currentFocusIndex == index;
+  }
+
+  void _scrollToFocusedItem() {
+    if (!scrollController.hasClients) return;
+
+    final itemHeight = 72.0; // Height of each item including padding
+
+    // Calculate the target position to center the focused item
+    final targetPosition = _currentFocusIndex * itemHeight;
+    final newPosition = targetPosition;
+
+    // Ensure we don't scroll beyond the list boundaries
+    final maxScroll = scrollController.position.maxScrollExtent;
+    final boundedPosition = newPosition.clamp(0.0, maxScroll);
+
+    // Use jumpTo for immediate response
+    scrollController.jumpTo(boundedPosition);
   }
 
   Future<void> loadData(String countryCode) async {
@@ -27,25 +117,16 @@ class CitySelectionPageViewModel extends AppViewModel {
       _allCities = await appDataService.getCities(countryCode);
       Cities = _getCities();
 
+      updateFocusNodes();
+
       DataLoaded = true;
     } catch (ex) {
-      IsErrorState = true;
-      ErrorMessage =
-          "Something went wrong. If the problem persists, plz contact support at ${AppConstants.SupportEmailAddress}.";
     } finally {
       setDataLodingIndicators(false);
     }
   }
 
-  List<City> _getCities() {
-    if (CitySearchController.text.isEmpty) {
-      return _allCities;
-    }
-
-    return <City>[
-      ..._allCities.where((city) => city.name!.toLowerCase().contains(CitySearchController.text.toLowerCase())),
-    ];
-  }
+  List<City> _getCities() => _allCities;
 
   void setSelectedCity(City city) {
     if (city.name! == SelectedCity) {
@@ -97,5 +178,15 @@ class CitySelectionPageViewModel extends AppViewModel {
 
   Future<void> saveLocationPermissionStatus() async {
     await appSettingsService.saveLocationSelectionCompleted();
+  }
+
+  @override
+  void dispose() {
+    for (var node in cityFocusNodes) {
+      node.dispose();
+    }
+    nextButtonFocus.dispose();
+    scrollController.dispose();
+    super.dispose();
   }
 }

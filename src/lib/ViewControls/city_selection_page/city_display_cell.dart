@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
 import 'package:muslim_life_mosque_edition/Models/city.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
@@ -8,24 +9,58 @@ class CityDisplayCell extends StatelessWidget {
   final City city;
   final bool isSelected;
   final void Function() onTapped;
+  final FocusNode focusNode;
 
-  const CityDisplayCell({super.key, required this.city, required this.onTapped, required this.isSelected});
+  const CityDisplayCell({
+    super.key,
+    required this.city,
+    required this.onTapped,
+    required this.isSelected,
+    required this.focusNode,
+  });
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-    onTap: onTapped,
-    child: Container(
-      padding: (16, 16).withSymetricPadding(),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppColors.DarkGrayColor.withValues(alpha: 0.7)),
-        color: isSelected ? AppColors.DarkGreenColor.withValues(alpha: 0.65) : AppColors.LightGreenColor,
-      ),
-      width: double.infinity,
-      child: Text(
-        city.name!,
-        style: isSelected ? AppStyles.RegularLight16TextStyle : AppStyles.RegularDark16TextStyle,
-        overflow: TextOverflow.ellipsis,
+  Widget build(BuildContext context) => Focus(
+    focusNode: focusNode,
+    onKeyEvent: (node, event) {
+      if (event is KeyDownEvent) {
+        if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
+          onTapped();
+          return KeyEventResult.handled;
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+    child: GestureDetector(
+      onTap: onTapped,
+      child: Container(
+        padding: (focusNode.hasFocus ? 8 : 0).withAllPadding(),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: focusNode.hasFocus ? AppColors.LightIndicatorColor.withValues(alpha: 0.8) : Colors.transparent,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        ),
+        child: Container(
+          padding: (16, 16).withSymetricPadding(),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.DarkGreenColor.withValues(alpha: 0.65) : AppColors.LightGreenColor,
+            border: Border.all(
+              color:
+                  focusNode.hasFocus
+                      ? AppColors.LightIndicatorColor
+                      : AppColors.LightIndicatorColor.withValues(alpha: 0.5),
+              width: focusNode.hasFocus ? 2.0 : 1.0,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Text(
+            city.name!,
+            style: isSelected ? AppStyles.RegularLight16TextStyle : AppStyles.RegularDark16TextStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ),
     ),
   );

@@ -76,9 +76,8 @@ class CountryDisplayCell extends StatelessWidget {
               12.toHorizontalSpacer(),
               Text(
                 country.name!,
-                style: AppStyles.OnboardingSubTitleTextStyle.copyWith(
-                  color: isSelected ? AppColors.LightIndicatorColor : AppColors.DarkGreenColor,
-                ),
+                style: isSelected ? AppStyles.RegularLight16TextStyle : AppStyles.RegularDark16TextStyle,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
