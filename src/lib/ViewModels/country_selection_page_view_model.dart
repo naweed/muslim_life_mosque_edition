@@ -16,11 +16,8 @@ class CountrySelectionPageViewModel extends AppViewModel {
   List<Country> Countries = [];
   String SelectedCountry = "";
 
-  late TextEditingController CountrySearchController;
-
   CountrySelectionPageViewModel() : super() {
     this.Title = "Country Selection";
-    CountrySearchController = TextEditingController();
   }
 
   void requestFocus() async {
@@ -123,15 +120,7 @@ class CountrySelectionPageViewModel extends AppViewModel {
     }
   }
 
-  List<Country> _getCountries() {
-    if (CountrySearchController.text.isEmpty) {
-      return _allCountries;
-    }
-
-    return <Country>[
-      ..._allCountries.where((cntry) => cntry.name!.toLowerCase().contains(CountrySearchController.text.toLowerCase())),
-    ];
-  }
+  List<Country> _getCountries() => _allCountries;
 
   void setSelectedCountry(String countryCode) {
     if (countryCode == SelectedCountry) {
