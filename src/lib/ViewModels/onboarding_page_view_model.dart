@@ -40,5 +40,13 @@ class OnboardingPageViewModel extends AppViewModel {
 
   void requestFocus() async {
     FocusScope.of(screenContext).requestFocus(nextButtonFocus);
+
+    rebuildUi();
+  }
+
+  @override
+  void dispose() {
+    nextButtonFocus.dispose();
+    super.dispose();
   }
 }
