@@ -20,9 +20,8 @@ class OnboardingPageViewModel extends AppViewModel {
 
   List<OnboardingContent> get OnboardingScreens => OnboardingContent.onboardingScreens;
 
-  OnboardingPageViewModel(BuildContext context) : super() {
+  OnboardingPageViewModel() : super() {
     this.Title = AppConstants.ApplicationName;
-    screenContext = context;
   }
 
   Future<void> loadDataForCaching() async {

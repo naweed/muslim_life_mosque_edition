@@ -22,7 +22,8 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
 
   @override
   OnboardingPageViewModel viewModelBuilder(BuildContext context) {
-    pageViewModel = OnboardingPageViewModel(context);
+    pageViewModel = OnboardingPageViewModel();
+    pageViewModel.screenContext = context;
     return pageViewModel;
   }
 
