@@ -111,6 +111,11 @@ class AppStyles {
   //   color: AppColors.DarkTextColor,
   //   fontSize: 16,
   // );
+  static const TextStyle MediumDark24TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.DarkTextColor,
+    fontSize: 24,
+  );
 
   // //Light Light Text Styles
   // static const TextStyle LightLight12TextStyle = TextStyle(
@@ -244,12 +249,12 @@ class AppStyles {
   );
   static const TextStyle OnboardingTitleTextStyle = TextStyle(
     fontFamily: "BoldFont",
-    color: AppColors.LightTextColor,
+    color: AppColors.DarkTextColor,
     fontSize: 40,
   );
   static const TextStyle OnboardingSubTitleTextStyle = TextStyle(
     fontFamily: "RegularFont",
-    color: AppColors.LightTextColor,
+    color: AppColors.DarkTextColor,
     fontSize: 20,
   );
 
@@ -267,7 +272,7 @@ class AppStyles {
   static const TextStyle PageButtonTextStyle = TextStyle(
     fontFamily: "MediumFont",
     color: AppColors.ButtonTextColor,
-    fontSize: 22,
+    fontSize: 24,
   );
   static const TextStyle LinkButtonTextStyle = TextStyle(
     fontFamily: "MediumFont",

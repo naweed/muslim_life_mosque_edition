@@ -91,7 +91,7 @@ class CountrySelectionPageViewModel extends AppViewModel {
   void _scrollToFocusedItem() {
     if (!scrollController.hasClients) return;
 
-    final itemHeight = 72.0; // Height of each item including padding
+    final itemHeight = 87.0; // Height of each item including padding
 
     // Calculate the target position to center the focused item
     final targetPosition = _currentFocusIndex * itemHeight;

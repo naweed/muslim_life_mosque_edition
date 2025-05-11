@@ -34,26 +34,26 @@ class CityDisplayCell extends StatelessWidget {
     child: GestureDetector(
       onTap: onTapped,
       child: Container(
-        padding: (focusNode.hasFocus ? 8 : 0).withAllPadding(),
+        padding: 8.withAllPadding(),
         decoration: BoxDecoration(
           border: Border.all(
-            color: focusNode.hasFocus ? AppColors.LightIndicatorColor.withValues(alpha: 0.8) : Colors.transparent,
-            width: 1.5,
+            color: focusNode.hasFocus ? AppColors.ButtonBackgroundColor.withValues(alpha: 0.8) : Colors.transparent,
+            width: 1.0,
           ),
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
         child: Container(
           padding: (16, 16).withSymetricPadding(),
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.DarkGreenColor.withValues(alpha: 0.65) : AppColors.LightGreenColor,
+            color: isSelected ? AppColors.ButtonBackgroundColor.withValues(alpha: 0.65) : AppColors.DarkAppColor,
             border: Border.all(
               color:
                   focusNode.hasFocus
-                      ? AppColors.LightIndicatorColor
-                      : AppColors.LightIndicatorColor.withValues(alpha: 0.5),
+                      ? AppColors.ButtonBackgroundColor
+                      : AppColors.ButtonBackgroundColor.withValues(alpha: 0.5),
               width: focusNode.hasFocus ? 2.0 : 1.0,
             ),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
             city.name!,

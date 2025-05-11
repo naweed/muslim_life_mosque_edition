@@ -69,7 +69,7 @@ class CitySelectionPage extends StackedView<CitySelectionPageViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Select your Nearest City!", style: AppStyles.MediumLight24TextStyle),
+                  Text("Select your Nearest City!", style: AppStyles.MediumDark24TextStyle),
                   12.toVerticalSpacer(),
                   SuperListView.separated(
                     controller: viewModel.scrollController,
@@ -97,9 +97,9 @@ class CitySelectionPage extends StackedView<CitySelectionPageViewModel> {
                       border: Border.all(
                         color:
                             viewModel.nextButtonFocus.hasFocus
-                                ? AppColors.LightIndicatorColor.withValues(alpha: 0.8)
+                                ? AppColors.ButtonBackgroundColor.withValues(alpha: 0.8)
                                 : Colors.transparent,
-                        width: 1.5,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),

@@ -52,7 +52,7 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(viewModel.Title, style: AppStyles.OnboardingTitleTextStyle),
-                8.toVerticalSpacer(),
+                12.toVerticalSpacer(),
                 Text(
                   viewModel.Description,
                   style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
@@ -62,7 +62,7 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
                 Container(
                   padding: 8.withAllPadding(),
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.LightIndicatorColor.withValues(alpha: 0.8), width: 1.5),
+                    border: Border.all(color: AppColors.ButtonBackgroundColor.withValues(alpha: 0.8), width: 1.0),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                   child: Actions(

@@ -12,7 +12,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 52,
+      height: 60,
       child: ElevatedButton(
         onPressed: isEnabled ? onPressed : null,
         style: AppStyles.PageButtonStyle,

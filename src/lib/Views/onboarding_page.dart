@@ -89,7 +89,7 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
                       child: Container(
                         padding: 8.withAllPadding(),
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.LightIndicatorColor.withValues(alpha: 0.8), width: 1.5),
+                          border: Border.all(color: AppColors.ButtonBackgroundColor.withValues(alpha: 0.8), width: 1.0),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         ),
 
@@ -103,14 +103,14 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
                                 height: 64,
                                 width: 64,
                                 child: CircularProgressIndicator(
-                                  backgroundColor: AppColors.LightIndicatorColor.withValues(alpha: 0.2),
-                                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.DarkGreenColor),
+                                  backgroundColor: AppColors.LightIndicatorColor,
+                                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.ButtonBackgroundColor),
                                   value: (viewModel.currentPage + 1) / viewModel.OnboardingScreens.length,
                                 ),
                               ),
                               const CircleAvatar(
-                                backgroundColor: AppColors.DarkGreenColor,
-                                child: Icon(Icons.arrow_forward_ios_outlined, color: AppColors.LightIndicatorColor),
+                                backgroundColor: AppColors.ButtonBackgroundColor,
+                                child: Icon(Icons.arrow_forward_ios_outlined, color: AppColors.LightAppColor),
                               ),
                             ],
                           ),
@@ -135,7 +135,7 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
     margin: 12.withRightPadding(),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-      color: viewModel.currentPage == index ? AppColors.DarkGreenColor : AppColors.LightIndicatorColor,
+      color: viewModel.currentPage == index ? AppColors.ButtonBackgroundColor : AppColors.LightIndicatorColor,
     ),
   );
 }
