@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
-import 'package:muslim_life_mosque_edition/Views/location_permissions_page.dart';
+import 'package:muslim_life_mosque_edition/Views/mosq_code_selection_page.dart';
 import 'package:muslim_life_mosque_edition/Views/onboarding_page.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 
@@ -39,7 +39,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(visualDensity: VisualDensity.standard),
       home:
           AppSession.OnboadingCompleted
-              ? (AppSession.LocationSelectionCompleted ? StartPage() : LocationPermissionsPage())
+              ? (AppSession.MosqueCodeSelectionCompleted ? StartPage() : MosqueCodeSelectionPage())
               : OnboardingPage(),
     );
   }

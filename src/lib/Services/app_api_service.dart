@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:muslim_life_mosque_edition/Framework/Extensions/string_extensions.dart';
+import 'package:muslim_life_mosque_edition/Models/mosque.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:muslim_life_mosque_edition/Services/cache_data_service.dart';
 import 'package:muslim_life_mosque_edition/Services/muslim_life_http_client.dart';
@@ -46,12 +47,12 @@ class AppApiService {
     }
   }
 
-  // //Get User City
-  // Future<City> getUserCity(double lat, double lon) async {
-  //   var resourceUri = "common/user_location?lat=$lat&lon=$lon&ap_version=${AppConstants.Api_Location_Version}";
+  //Get Mosque Details
+  Future<Mosque> getMosqueDetails(String mosqueCode) async {
+    var resourceUri = "mosque/get/$mosqueCode";
 
-  //   var response = await _fetchData(resource: resourceUri, hoursToCache: 480); //20 days caching
+    var response = await _fetchData(resource: resourceUri, hoursToCache: 24); //Cached for 1 day
 
-  //   return City.fromJson(jsonDecode(response));
-  // }
+    return Mosque.fromJson(jsonDecode(response));
+  }
 }
