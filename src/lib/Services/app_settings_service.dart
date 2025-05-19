@@ -38,7 +38,7 @@ class AppSettingService {
   Future<void> saveOnboardingCompleted() async =>
       await SecureStorageHelpers.writeKeyValue(_secureStorage, onboardingKey, "true");
 
-  //Location Selection Status
+  //Location Selection Status: TODO
   Future<bool> getLocationSelectionCompleted() async {
     if (!(await SecureStorageHelpers.checkKeyExists(_secureStorage, locationSelectionKey))) {
       await SecureStorageHelpers.writeKeyValue(_secureStorage, locationSelectionKey, "false");
