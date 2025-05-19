@@ -35,6 +35,15 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     }
   }
 
+  void handleOtpInput(String value, int index) {
+    if (value.isNotEmpty) {
+      // Ensure the value is uppercase
+      otpControllers[index].text = value.toUpperCase();
+      // Move focus to next field
+      moveToNextField(index);
+    }
+  }
+
   Future<void> saveMosquCodeSelectionStatus() async {
     await appSettingsService.saveMosqueCodeSelectionCompleted();
   }

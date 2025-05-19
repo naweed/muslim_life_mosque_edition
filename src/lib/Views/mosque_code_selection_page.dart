@@ -47,13 +47,17 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
       ),
       child: Focus(
         focusNode: viewModel.otpFocusNodes[index],
-        onKey: (node, event) {
+        onKeyEvent: (node, event) {
           if (event is KeyDownEvent) {
             if (event.logicalKey == LogicalKeyboardKey.arrowRight && index < 4) {
               viewModel.otpFocusNodes[index + 1].requestFocus();
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft && index > 0) {
               viewModel.otpFocusNodes[index - 1].requestFocus();
+              return KeyEventResult.handled;
+            } else if (event.logicalKey == LogicalKeyboardKey.select) {
+              // Move to next field on D-pad select
+              viewModel.moveToNextField(index);
               return KeyEventResult.handled;
             }
           }
@@ -64,18 +68,12 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
           textAlign: TextAlign.center,
           maxLength: 1,
           style: AppStyles.OnboardingSubTitleTextStyle,
+          textCapitalization: TextCapitalization.characters,
+          keyboardType: TextInputType.text,
+          textInputAction: index < 4 ? TextInputAction.next : TextInputAction.done,
           decoration: const InputDecoration(counterText: '', border: InputBorder.none),
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'[A-Z]')),
-            TextInputFormatter.withFunction((oldValue, newValue) {
-              return TextEditingValue(text: newValue.text.toUpperCase(), selection: newValue.selection);
-            }),
-          ],
-          onChanged: (value) {
-            if (value.isNotEmpty) {
-              viewModel.moveToNextField(index);
-            }
-          },
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[A-Z]'))],
+          onChanged: (value) => viewModel.handleOtpInput(value, index),
         ),
       ),
     );
