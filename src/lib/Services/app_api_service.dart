@@ -51,7 +51,7 @@ class AppApiService {
   Future<Mosque> getMosqueDetails(String mosqueCode) async {
     var resourceUri = "mosque/get/$mosqueCode";
 
-    var response = await _fetchData(resource: resourceUri, hoursToCache: 24); //Cached for 1 day
+    var response = await _fetchData(resource: resourceUri, hoursToCache: 6); //Cached for 6 hours
 
     return Mosque.fromJson(jsonDecode(response));
   }
