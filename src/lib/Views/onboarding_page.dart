@@ -12,7 +12,7 @@ import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/onboarding_page/onboarding_content_widget.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/onboarding_page_view_model.dart';
-import 'package:muslim_life_mosque_edition/Views/location_permissions_page.dart';
+import 'package:muslim_life_mosque_edition/Views/mosque_code_selection_page.dart';
 import 'package:stacked/stacked.dart';
 
 class OnboardingPage extends StackedView<OnboardingPageViewModel> {
@@ -73,7 +73,7 @@ class OnboardingPage extends StackedView<OnboardingPageViewModel> {
                           await viewModel.saveOnboardingStatus();
 
                           // Navigate to Permissions screen
-                          await context.pushReplacement(LocationPermissionsPage());
+                          await context.pushReplacement(MosqueCodeSelectionPage());
                           return;
                         }
 

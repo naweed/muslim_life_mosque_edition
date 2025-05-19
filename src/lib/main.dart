@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
-import 'package:muslim_life_mosque_edition/Views/mosq_code_selection_page.dart';
+import 'package:muslim_life_mosque_edition/Views/mosque_code_selection_page.dart';
 import 'package:muslim_life_mosque_edition/Views/onboarding_page.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 

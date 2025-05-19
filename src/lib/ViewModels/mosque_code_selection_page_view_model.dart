@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
 
-class LocationPermissionPageViewModel extends AppViewModel {
+class MosqueCodeSelectionPageViewModel extends AppViewModel {
   late BuildContext screenContext;
   final FocusNode continueButtonFocus = FocusNode();
 
   String Description =
-      "We need to know your location in order to find accurate prayer times. We promise that we will not use your location for any other purpose.";
+      "Please input the 5 digit unique code for your mosque. This code is available under the Mosque Name in the Masjid Pulse Portal.";
 
   String ButtonText = "Continue";
 
   bool isButtonEnabled = true;
 
-  LocationPermissionPageViewModel() : super() {
-    this.Title = "Location Access!";
+  MosqueCodeSelectionPageViewModel() : super() {
+    this.Title = "Register your Mosque!";
   }
 
   void requestFocus() async {

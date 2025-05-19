@@ -11,29 +11,29 @@ import 'package:muslim_life_mosque_edition/Shared/app_assets.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/page_button.dart';
-import 'package:muslim_life_mosque_edition/ViewModels/location_permissions_page_view_model.dart';
+import 'package:muslim_life_mosque_edition/ViewModels/mosque_code_selection_page_view_model.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 import 'package:stacked/stacked.dart';
 
-class LocationPermissionsPage extends StackedView<LocationPermissionPageViewModel> {
-  late LocationPermissionPageViewModel pageViewModel;
+class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewModel> {
+  late MosqueCodeSelectionPageViewModel pageViewModel;
 
-  LocationPermissionsPage({super.key});
+  MosqueCodeSelectionPage({super.key});
 
   @override
-  LocationPermissionPageViewModel viewModelBuilder(BuildContext context) {
-    pageViewModel = LocationPermissionPageViewModel();
+  MosqueCodeSelectionPageViewModel viewModelBuilder(BuildContext context) {
+    pageViewModel = MosqueCodeSelectionPageViewModel();
     pageViewModel.screenContext = context;
     return pageViewModel;
   }
 
   @override
-  void onViewModelReady(LocationPermissionPageViewModel viewModel) async {
+  void onViewModelReady(MosqueCodeSelectionPageViewModel viewModel) async {
     viewModel.requestFocus();
   }
 
   @override
-  Widget builder(BuildContext context, LocationPermissionPageViewModel viewModel, Widget? child) => Scaffold(
+  Widget builder(BuildContext context, MosqueCodeSelectionPageViewModel viewModel, Widget? child) => Scaffold(
     body: Shortcuts(
       shortcuts: <LogicalKeySet, Intent>{LogicalKeySet(LogicalKeyboardKey.select): EnterButtonIntent()},
       child: Container(
@@ -45,7 +45,7 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(AppAssets.OnboardingLocationPermission, width: context.width * 0.3),
+            Image.asset(AppAssets.MosqueImagePNG, width: context.width * 0.3),
             48.toHorizontalSpacer(),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
