@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:muslim_life_mosque_edition/Actions/enter_button_action.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/device_extensions.dart';
-import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/sized_box_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/widget_extensions.dart';
@@ -12,7 +11,6 @@ import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/page_button.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/mosque_code_selection_page_view_model.dart';
-import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 import 'package:stacked/stacked.dart';
 
 class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewModel> {
@@ -34,15 +32,15 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
 
   Widget _buildOtpField(int index, MosqueCodeSelectionPageViewModel viewModel) {
     return Container(
-      width: 50,
-      height: 50,
+      width: 60,
+      height: 60,
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         border: Border.all(
           color:
               viewModel.otpFocusNodes[index].hasFocus
                   ? AppColors.ButtonBackgroundColor
-                  : AppColors.ButtonBackgroundColor.withValues(alpha: 0.8),
+                  : AppColors.ButtonBackgroundColor.withValues(alpha: 0.2),
           width: viewModel.otpFocusNodes[index].hasFocus ? 2.0 : 1.0,
         ),
         borderRadius: BorderRadius.circular(5),
@@ -120,16 +118,14 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
                   decoration: BoxDecoration(
                     border: Border.all(
                       color:
-                          viewModel.continueButtonFocus.hasFocus
-                              ? AppColors.ButtonBackgroundColor
-                              : AppColors.ButtonBackgroundColor.withValues(alpha: 0.8),
+                          viewModel.continueButtonFocus.hasFocus ? AppColors.ButtonBackgroundColor : Colors.transparent,
                       width: viewModel.continueButtonFocus.hasFocus ? 2.0 : 1.0,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                   child: Actions(
                     actions: <Type, Action<Intent>>{
-                      EnterButtonIntent: EnterButtonAction(() async => await context.pushReplacement(StartPage())),
+                      EnterButtonIntent: EnterButtonAction(() async => await viewModel.continueWithMosqueCode()),
                     },
                     child: Focus(
                       focusNode: viewModel.continueButtonFocus,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
+import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 
 class MosqueCodeSelectionPageViewModel extends AppViewModel {
   late BuildContext screenContext;
@@ -37,6 +39,14 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     await appSettingsService.saveMosqueCodeSelectionCompleted();
   }
 
+  Future<void> continueWithMosqueCode() async {
+    //TODO: Check for Mosque Code and fetch the data
+
+    //If success, save the status and move to Start Page
+    //TODO: Uncomment await saveMosquCodeSelectionStatus();
+    await screenContext.pushReplacement(StartPage());
+  }
+
   @override
   void dispose() {
     for (var node in otpFocusNodes) {
@@ -46,6 +56,7 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
       controller.dispose();
     }
     continueButtonFocus.dispose();
+
     super.dispose();
   }
 }
