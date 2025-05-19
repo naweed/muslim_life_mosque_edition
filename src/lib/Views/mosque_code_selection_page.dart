@@ -32,6 +32,57 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
     viewModel.requestFocus();
   }
 
+  Widget _buildOtpField(int index, MosqueCodeSelectionPageViewModel viewModel) {
+    return Container(
+      width: 50,
+      height: 50,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:
+              viewModel.otpFocusNodes[index].hasFocus
+                  ? AppColors.ButtonBackgroundColor
+                  : AppColors.ButtonBackgroundColor.withValues(alpha: 0.8),
+          width: viewModel.otpFocusNodes[index].hasFocus ? 2.0 : 1.0,
+        ),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Focus(
+        focusNode: viewModel.otpFocusNodes[index],
+        onKey: (node, event) {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.arrowRight && index < 4) {
+              viewModel.otpFocusNodes[index + 1].requestFocus();
+              return KeyEventResult.handled;
+            } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft && index > 0) {
+              viewModel.otpFocusNodes[index - 1].requestFocus();
+              return KeyEventResult.handled;
+            }
+          }
+          return KeyEventResult.ignored;
+        },
+        child: TextField(
+          controller: viewModel.otpControllers[index],
+          textAlign: TextAlign.center,
+          maxLength: 1,
+          style: AppStyles.OnboardingSubTitleTextStyle,
+          decoration: const InputDecoration(counterText: '', border: InputBorder.none),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[A-Z]')),
+            TextInputFormatter.withFunction((oldValue, newValue) {
+              return TextEditingValue(text: newValue.text.toUpperCase(), selection: newValue.selection);
+            }),
+          ],
+          onChanged: (value) {
+            if (value.isNotEmpty) {
+              viewModel.moveToNextField(index);
+            }
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget builder(BuildContext context, MosqueCodeSelectionPageViewModel viewModel, Widget? child) => Scaffold(
     body: Shortcuts(
@@ -58,11 +109,22 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
                   style: AppStyles.OnboardingSubTitleTextStyle.copyWith(height: 1.25),
                   textAlign: TextAlign.center,
                 ),
-                64.toVerticalSpacer(),
+                32.toVerticalSpacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(5, (index) => _buildOtpField(index, viewModel)),
+                ),
+                32.toVerticalSpacer(),
                 Container(
                   padding: 8.withAllPadding(),
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.ButtonBackgroundColor.withValues(alpha: 0.8), width: 1.0),
+                    border: Border.all(
+                      color:
+                          viewModel.continueButtonFocus.hasFocus
+                              ? AppColors.ButtonBackgroundColor
+                              : AppColors.ButtonBackgroundColor.withValues(alpha: 0.8),
+                      width: viewModel.continueButtonFocus.hasFocus ? 2.0 : 1.0,
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                   child: Actions(
