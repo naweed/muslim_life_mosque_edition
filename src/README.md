@@ -1,3 +1,3 @@
-# muslim_life_mosque_edition
+# Masjid Pulse
 
 A new Flutter project.

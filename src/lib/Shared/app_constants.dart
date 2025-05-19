@@ -1,13 +1,10 @@
 class AppConstants {
-  static const String ApplicationName = "Muslim Life (Mosque Edition)";
-  static const String SupportEmailAddress = "muslimlife@xgeno.com";
-  static const String AppWebsite = "https://muslimlife.xgeno.com";
-  static const String TwitterHandle = "@MuslimLifeApp";
+  static const String ApplicationName = "Masjid Pulse";
+  static const String SupportEmailAddress = "Masjid-Pulse@xgeno.com";
+  static const String AppWebsite = "https://masjidpulse.app";
   static const String LocalImagesPath = "assets/images";
-  static const String FlagsPath = "assets/flags";
-  static const String DataPath = "assets/data";
 
-  static const String API_URL = "https://muslimlife.xgeno-soft.com/v.1.0/";
+  static const String API_URL = "https://masjid-portal.xgeno-soft.com/v.1.0/";
 
   static const String Client_ID_Key = "ml_client_id";
   static const String Client_ID = "RUd/ePgfD8w+hvpBtsZm1Ygl1j7NSoOmzXmWTuFpon95j0EdhzOq1VEM7Mx5ubLu";

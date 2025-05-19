@@ -1,10 +1,10 @@
-import 'package:muslim_life_mosque_edition/Services/app_data_service.dart';
+import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:stacked/stacked.dart';
 
 class AppViewModel extends BaseViewModel {
   late AppSettingService appSettingsService;
-  late AppDataService appDataService;
+  late AppApiService appApiService;
 
   String Title = "";
   bool IsBusy = false;
@@ -16,7 +16,6 @@ class AppViewModel extends BaseViewModel {
 
   AppViewModel() {
     appSettingsService = AppSettingService();
-    appDataService = AppDataService();
   }
 
   void setDataLodingIndicators(bool isStaring) {

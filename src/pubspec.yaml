@@ -1,5 +1,5 @@
 name: muslim_life_mosque_edition
-description: "Muslim Life (Mosque Edition)"
+description: "Masjid Pulse"
 publish_to: 'none'
 version: 1.0.0
 
@@ -41,9 +41,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/flags/
-    - assets/data/
-    - assets/data/cities/
 
   fonts:
     - family: BoldFont

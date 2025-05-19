@@ -12,7 +12,7 @@ import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/page_button.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/location_permissions_page_view_model.dart';
-import 'package:muslim_life_mosque_edition/Views/country_selection_page.dart';
+import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 import 'package:stacked/stacked.dart';
 
 class LocationPermissionsPage extends StackedView<LocationPermissionPageViewModel> {
@@ -67,9 +67,7 @@ class LocationPermissionsPage extends StackedView<LocationPermissionPageViewMode
                   ),
                   child: Actions(
                     actions: <Type, Action<Intent>>{
-                      EnterButtonIntent: EnterButtonAction(
-                        () async => await context.pushReplacement(CountrySelectionPage()),
-                      ),
+                      EnterButtonIntent: EnterButtonAction(() async => await context.pushReplacement(StartPage())),
                     },
                     child: Focus(
                       focusNode: viewModel.continueButtonFocus,
