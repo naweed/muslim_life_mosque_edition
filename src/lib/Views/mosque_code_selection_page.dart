@@ -47,13 +47,21 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
       ),
       child: Focus(
         focusNode: viewModel.otpFocusNodes[index],
+        onFocusChange: (hasFocus) {
+          if (hasFocus) {
+            viewModel.otpControllers[index].selection = TextSelection(
+              baseOffset: 0,
+              extentOffset: viewModel.otpControllers[index].text.length,
+            );
+          }
+        },
         onKeyEvent: (node, event) {
           if (event is KeyDownEvent) {
             if (event.logicalKey == LogicalKeyboardKey.arrowRight && index < 4) {
-              viewModel.otpFocusNodes[index + 1].requestFocus();
+              viewModel.requestFocus(index: index + 1);
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft && index > 0) {
-              viewModel.otpFocusNodes[index - 1].requestFocus();
+              viewModel.requestFocus(index: index - 1);
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
               // Move to next field on D-pad select

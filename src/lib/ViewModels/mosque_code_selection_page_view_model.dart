@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
@@ -21,17 +20,17 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     this.Title = "Register your Mosque!";
   }
 
-  void requestFocus() async {
+  void requestFocus({int index = 0}) async {
     // Focus the first OTP field initially
-    FocusScope.of(screenContext).requestFocus(otpFocusNodes[0]);
-    //SystemChannels.textInput.invokeMethod("TextInput.show");
+    FocusScope.of(screenContext).requestFocus(otpFocusNodes[index]);
+
+    rebuildUi();
   }
 
   void moveToNextField(int currentIndex) {
     if (currentIndex < 4) {
       // Move to next OTP field
       FocusScope.of(screenContext).requestFocus(otpFocusNodes[currentIndex + 1]);
-      //SystemChannels.textInput.invokeMethod("TextInput.show");
     } else {
       // Move to continue button on last field
       FocusScope.of(screenContext).requestFocus(continueButtonFocus);
