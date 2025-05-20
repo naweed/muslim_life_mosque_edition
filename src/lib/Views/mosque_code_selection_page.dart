@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:muslim_life_mosque_edition/Actions/enter_button_action.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/device_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
@@ -27,13 +28,14 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
 
   @override
   void onViewModelReady(MosqueCodeSelectionPageViewModel viewModel) async {
+    await Future.delayed(1.seconds);
     viewModel.requestFocus();
   }
 
   Widget _buildOtpField(int index, MosqueCodeSelectionPageViewModel viewModel) {
     return Container(
       width: 60,
-      height: 60,
+      height: 68,
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         border: Border.all(
@@ -46,7 +48,6 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
         borderRadius: BorderRadius.circular(5),
       ),
       child: Focus(
-        focusNode: viewModel.otpFocusNodes[index],
         onFocusChange: (hasFocus) {
           if (hasFocus) {
             viewModel.otpControllers[index].selection = TextSelection(
@@ -72,16 +73,17 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
           return KeyEventResult.ignored;
         },
         child: TextField(
-          autofocus: true,
+          focusNode: viewModel.otpFocusNodes[index],
+          //autofocus: true,
           controller: viewModel.otpControllers[index],
           showCursor: true,
           textAlign: TextAlign.center,
           maxLength: 1,
-          style: AppStyles.OnboardingSubTitleTextStyle,
+          style: AppStyles.OnboardingTitleTextStyle,
           textCapitalization: TextCapitalization.characters,
           keyboardType: TextInputType.text,
           textInputAction: index < 4 ? TextInputAction.next : TextInputAction.done,
-          decoration: const InputDecoration(counterText: '', border: InputBorder.none),
+          decoration: InputDecoration(counterText: '', border: InputBorder.none, contentPadding: 4.withTopPadding()),
           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[A-Z]'))],
           onChanged: (value) => viewModel.handleOtpInput(value, index),
         ),
