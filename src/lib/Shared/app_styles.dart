@@ -231,11 +231,11 @@ class AppStyles {
   //   color: AppColors.LightTextColor,
   //   fontSize: 22,
   // );
-  // static const TextStyle ToastTextStyle = TextStyle(
-  //   fontFamily: "MediumFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 16,
-  // );
+  static const TextStyle ToastTextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor,
+    fontSize: 16,
+  );
   static const TextStyle IndicatorTextStyle = TextStyle(
     fontFamily: "ExtraLightFont",
     color: AppColors.DarkTextColor,

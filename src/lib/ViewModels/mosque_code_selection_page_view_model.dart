@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
+import 'package:muslim_life_mosque_edition/Framework/Helpers/toast_helpers.dart';
 import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
@@ -56,7 +57,30 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
   }
 
   Future<void> continueWithMosqueCode() async {
-    //TODO: Get the code and check if it is 5 digits
+    //Get the code and check if it is 5 digits
+    var mosqueCode =
+        otpControllers[0].text +
+        otpControllers[1].text +
+        otpControllers[2].text +
+        otpControllers[3].text +
+        otpControllers[4].text;
+
+    if (mosqueCode.length != 5) {
+      //Display error toast
+      ToastHelpers.showVeryLongToast(
+        screenContext,
+        "Please enter the 5 digit Mosque code. You can get it from the Masjid Pulse Portal under your account.",
+        isError: true,
+      );
+
+      //Reset code boxes
+      resetCodeBoxes();
+
+      //Reset Focus to first box
+      requestFocus();
+
+      return;
+    }
 
     //TODO: Check for Mosque Code and fetch the data
 
@@ -65,6 +89,14 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     //If success, save the status and move to Start Page
     //TODO: Uncomment await saveMosquCodeSelectionStatus();
     await screenContext.pushReplacement(StartPage());
+  }
+
+  void resetCodeBoxes() {
+    otpControllers[0].text = "";
+    otpControllers[1].text = "";
+    otpControllers[2].text = "";
+    otpControllers[3].text = "";
+    otpControllers[4].text = "";
   }
 
   @override
