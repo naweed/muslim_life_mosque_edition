@@ -64,6 +64,7 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
           return KeyEventResult.ignored;
         },
         child: TextField(
+          autofocus: true,
           controller: viewModel.otpControllers[index],
           textAlign: TextAlign.center,
           maxLength: 1,
