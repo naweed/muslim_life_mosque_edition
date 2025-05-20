@@ -52,10 +52,6 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     }
   }
 
-  Future<void> saveMosquCodeSelectionStatus() async {
-    await appSettingsService.saveMosqueCodeSelectionCompleted();
-  }
-
   Future<void> continueWithMosqueCode() async {
     //Get the code and check if it is 5 digits
     var mosqueCode =
@@ -82,13 +78,16 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
       return;
     }
 
-    //TODO: Check for Mosque Code and fetch the data
+    try {
+      //TODO: Check for Mosque Code and fetch the data
 
-    //TODO: Save status and mosque code
+      //TODO: Uncomment Save Mosque Code Status
+      //await appSettingsService.saveMosqueCode(mosqueCode);
+      //await appSettingsService.saveMosqueCodeSelectionCompleted();
 
-    //If success, save the status and move to Start Page
-    //TODO: Uncomment await saveMosquCodeSelectionStatus();
-    await screenContext.pushReplacement(StartPage());
+      //TODO: Uncomment Redirect to Start Page
+      //await screenContext.pushReplacement(StartPage());
+    } catch (ex) {}
   }
 
   void resetCodeBoxes() {
