@@ -33,6 +33,8 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
       // Move to continue button on last field
       FocusScope.of(screenContext).requestFocus(continueButtonFocus);
     }
+
+    rebuildUi();
   }
 
   void handleOtpInput(String value, int index) {

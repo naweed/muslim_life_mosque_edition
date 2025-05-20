@@ -55,7 +55,7 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
             } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft && index > 0) {
               viewModel.otpFocusNodes[index - 1].requestFocus();
               return KeyEventResult.handled;
-            } else if (event.logicalKey == LogicalKeyboardKey.select) {
+            } else if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
               // Move to next field on D-pad select
               viewModel.moveToNextField(index);
               return KeyEventResult.handled;
