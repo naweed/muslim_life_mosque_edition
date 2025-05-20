@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 class AppSettingService {
   final String onboardingKey = "MosqueLife_OB_Completed";
   final String mosqueCodeSelectionKey = "MosqueLife_MCodeSelection_Completed";
+  final String mosqueCodeKey = "MosqueLife_Mosque_Code";
   final String guidKey = "MosqueLife_Guid";
   final String appStartDateKey = "MosqueLife_AppStartDate";
 
@@ -52,6 +53,18 @@ class AppSettingService {
 
   Future<void> saveMosqueCodeSelectionCompleted() async =>
       await SecureStorageHelpers.writeKeyValue(_secureStorage, mosqueCodeSelectionKey, "true");
+
+  //Mosque Code
+  Future<String> getMosqueCode() async {
+    if (!(await SecureStorageHelpers.checkKeyExists(_secureStorage, mosqueCodeKey))) {
+      await SecureStorageHelpers.writeKeyValue(_secureStorage, mosqueCodeKey, "");
+    }
+
+    return (await SecureStorageHelpers.readKeyValue(_secureStorage, mosqueCodeKey)) ?? "";
+  }
+
+  Future<void> saveMosqueCode(String mosqueCode) async =>
+      await SecureStorageHelpers.writeKeyValue(_secureStorage, mosqueCodeKey, mosqueCode);
 
   //Unique App Key
   Future<String> getAppUniqueKey() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/navigation_extentions.dart';
+import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/app_view_model.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
 
@@ -18,6 +19,8 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
 
   MosqueCodeSelectionPageViewModel() : super() {
     this.Title = "Register your Mosque!";
+
+    appApiService = AppApiService();
   }
 
   void requestFocus({int index = 0}) async {
@@ -53,7 +56,11 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
   }
 
   Future<void> continueWithMosqueCode() async {
+    //TODO: Get the code and check if it is 5 digits
+
     //TODO: Check for Mosque Code and fetch the data
+
+    //TODO: Save status and mosque code
 
     //If success, save the status and move to Start Page
     //TODO: Uncomment await saveMosquCodeSelectionStatus();
