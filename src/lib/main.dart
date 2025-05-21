@@ -9,6 +9,7 @@ import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
 import 'package:muslim_life_mosque_edition/Views/mosque_code_selection_page.dart';
 import 'package:muslim_life_mosque_edition/Views/onboarding_page.dart';
 import 'package:muslim_life_mosque_edition/Views/start_page.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,9 @@ void main() async {
 
   //Override certificate
   HttpOverrides.global = LEHttpOverrides();
+
+  //Enable Wakelock
+  WakelockPlus.enable();
 
   //Run App
   runApp(const MainApp());
