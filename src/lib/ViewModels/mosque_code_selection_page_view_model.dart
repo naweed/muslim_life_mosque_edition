@@ -87,14 +87,14 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
       //Fetch the data
       var mosque = await appApiService.getMosqueDetails(mosqueCode);
 
-      ToastHelpers.showVeryLongToast(screenContext, mosque.mosqueName!, isError: true);
+      ToastHelpers.showVeryLongToast(screenContext, "${mosque.mosqueName!} loaded successfully!", isError: false);
 
-      //TODO: Uncomment Save Mosque Code Status
-      //await appSettingsService.saveMosqueCode(mosqueCode);
-      //await appSettingsService.saveMosqueCodeSelectionCompleted();
+      //Save Mosque Code Status
+      await appSettingsService.saveMosqueCode(mosqueCode);
+      await appSettingsService.saveMosqueCodeSelectionCompleted();
 
-      //TODO: Uncomment Redirect to Start Page
-      //await screenContext.pushReplacement(StartPage());
+      //Redirect to Start Page
+      await screenContext.pushReplacement(StartPage());
     } on Exception catch (ex) {
       ToastHelpers.showVeryLongToast(screenContext, ex.toString(), isError: true);
 

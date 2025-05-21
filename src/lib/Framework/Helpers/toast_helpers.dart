@@ -12,16 +12,11 @@ class ToastHelpers {
       autoDismiss: true,
       snackbarDuration: 6000.milliseconds,
       position: DelightSnackbarPosition.top,
-      builder:
-          (context) => ToastCard(
-            color: isError ? AppColors.ErrorColor : AppColors.AppPrimaryColor,
-            leading: Icon(
-              isError ? Icons.error_outline : Icons.check_outlined,
-              size: 22,
-              color: AppColors.LightTextColor,
-            ),
-            title: Text(message, style: AppStyles.ToastTextStyle),
-          ),
+      builder: (context) => ToastCard(
+        color: isError ? AppColors.ErrorColor : AppColors.ButtonBackgroundColor,
+        leading: Icon(isError ? Icons.error_outline : Icons.check_outlined, size: 22, color: AppColors.LightTextColor),
+        title: Text(message, style: AppStyles.ToastTextStyle),
+      ),
     ).show(context);
   }
 
@@ -29,16 +24,11 @@ class ToastHelpers {
     DelightToastBar(
       autoDismiss: true,
       snackbarDuration: 2000.milliseconds,
-      builder:
-          (context) => ToastCard(
-            color: isError ? AppColors.ErrorColor : AppColors.AppPrimaryColor,
-            leading: Icon(
-              isError ? Icons.error_outline : Icons.check_outlined,
-              size: 22,
-              color: AppColors.LightTextColor,
-            ),
-            title: Text(message, style: AppStyles.ToastTextStyle),
-          ),
+      builder: (context) => ToastCard(
+        color: isError ? AppColors.ErrorColor : AppColors.ButtonBackgroundColor,
+        leading: Icon(isError ? Icons.error_outline : Icons.check_outlined, size: 22, color: AppColors.LightTextColor),
+        title: Text(message, style: AppStyles.ToastTextStyle),
+      ),
     ).show(context);
   }
 
@@ -46,16 +36,11 @@ class ToastHelpers {
     DelightToastBar(
       autoDismiss: true,
       snackbarDuration: 1500.milliseconds,
-      builder:
-          (context) => ToastCard(
-            color: isError ? AppColors.ErrorColor : AppColors.AppPrimaryColor,
-            leading: Icon(
-              isError ? Icons.error_outline : Icons.check_outlined,
-              size: 22,
-              color: AppColors.LightTextColor,
-            ),
-            title: Text(message, style: AppStyles.ToastTextStyle),
-          ),
+      builder: (context) => ToastCard(
+        color: isError ? AppColors.ErrorColor : AppColors.ButtonBackgroundColor,
+        leading: Icon(isError ? Icons.error_outline : Icons.check_outlined, size: 22, color: AppColors.LightTextColor),
+        title: Text(message, style: AppStyles.ToastTextStyle),
+      ),
     ).show(context);
   }
 
@@ -64,16 +49,11 @@ class ToastHelpers {
       autoDismiss: true,
       snackbarDuration: 1000.milliseconds,
       animationDuration: 600.milliseconds,
-      builder:
-          (context) => ToastCard(
-            color: isError ? AppColors.ErrorColor : AppColors.AppPrimaryColor,
-            leading: Icon(
-              isError ? Icons.error_outline : Icons.check_outlined,
-              size: 22,
-              color: AppColors.LightTextColor,
-            ),
-            title: Text(message, style: AppStyles.ToastTextStyle),
-          ),
+      builder: (context) => ToastCard(
+        color: isError ? AppColors.ErrorColor : AppColors.ButtonBackgroundColor,
+        leading: Icon(isError ? Icons.error_outline : Icons.check_outlined, size: 22, color: AppColors.LightTextColor),
+        title: Text(message, style: AppStyles.ToastTextStyle),
+      ),
     ).show(context);
   }
 }
