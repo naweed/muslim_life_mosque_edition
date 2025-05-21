@@ -4,7 +4,7 @@ class AppConstants {
   static const String AppWebsite = "https://masjidpulse.app";
   static const String LocalImagesPath = "assets/images";
 
-  static const String API_URL = "https://masjid-portal.xgeno-soft.com/v.1.0/";
+  static const String API_URL = "https://masjid-portal.xgeno-soft.com/api/v1.0/";
 
   static const int VerySmallDuration = 100;
   static const int SmallDuration = 300;

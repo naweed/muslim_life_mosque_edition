@@ -53,6 +53,9 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
   }
 
   Future<void> continueWithMosqueCode() async {
+    ButtonText = "Loading...";
+    rebuildUi();
+
     //Get the code and check if it is 5 digits
     var mosqueCode =
         otpControllers[0].text +
@@ -69,6 +72,8 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
         isError: true,
       );
 
+      ButtonText = "Continue";
+
       //Reset code boxes
       resetCodeBoxes();
 
@@ -79,7 +84,10 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
     }
 
     try {
-      //TODO: Check for Mosque Code and fetch the data
+      //Fetch the data
+      var mosque = await appApiService.getMosqueDetails(mosqueCode);
+
+      ToastHelpers.showVeryLongToast(screenContext, mosque.mosqueName!, isError: true);
 
       //TODO: Uncomment Save Mosque Code Status
       //await appSettingsService.saveMosqueCode(mosqueCode);
@@ -87,7 +95,17 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
 
       //TODO: Uncomment Redirect to Start Page
       //await screenContext.pushReplacement(StartPage());
-    } catch (ex) {}
+    } on Exception catch (ex) {
+      ToastHelpers.showVeryLongToast(screenContext, ex.toString(), isError: true);
+
+      ButtonText = "Continue";
+
+      //Reset code boxes
+      resetCodeBoxes();
+
+      //Reset Focus to first box
+      requestFocus();
+    }
   }
 
   void resetCodeBoxes() {

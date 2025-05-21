@@ -37,7 +37,9 @@ class AppApiService {
 
       if (response.statusCode != 200) {
         //Throw error if no successful response is recieved
-        throw Exception('Failed to load data');
+        throw Exception(
+          'Either the Mosque Code is incorrect ot the Mosque is still not published. Please check the Majsid Pulse Portal for the correct code, and ensure that the mosque has been published.',
+        );
       } else {
         await cachedService.saveDataWithExpiration(resourceKey, response.body, Duration(hours: hoursToCache));
         return response.body;
