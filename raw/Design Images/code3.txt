@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SalahTracker TV</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #151A26;color: #E0E0E0;overflow: hidden;
+        }
+        .mosque-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1584041600008-cb15f2503f00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;z-index: -1;
+        }
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            color: #FFD700;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .date-info {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: #B0BEC5;}
+        .countdown-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #CFD8DC;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .countdown-prayer-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFC107;text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .countdown-timer-box {
+            background-color: rgba(38, 50, 56, 0.7);border-radius: 0.75rem;
+            padding: 1.5rem;
+            min-width: 100px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid #455A64;}
+        .countdown-timer-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #FFD700;}
+        .countdown-timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #90A4AE;}
+        .current-time-display {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #FFD700;text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .prayer-grid-card {
+            background-color: rgba(55, 71, 79, 0.6);border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid #607D8B;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .prayer-grid-card.next-prayer {
+            background-color: rgba(255, 193, 7, 0.2);border: 2px solid #FFC107;transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+        }
+        .prayer-grid-card.next-prayer .prayer-name {
+            color: #FFD700;}
+        .prayer-grid-card.next-prayer .prayer-time {
+            color: #FFECB3;}
+        .prayer-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #CFD8DC;margin-bottom: 0.25rem;
+        }
+        .prayer-time {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #E0E0E0;margin-bottom: 0.25rem;
+        }
+        .prayer-status,
+        .prayer-iqamah-time {
+            font-size: 0.85rem;
+            color: #B0BEC5;}
+        .prayer-grid-card.next-prayer .prayer-status,
+        .prayer-grid-card.next-prayer .prayer-iqamah-time {
+            color: #FFD700;}
+        .footer-quote {
+            font-size: 1rem;
+            color: #B0BEC5;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .footer-note {
+            font-size: 0.8rem;
+            color: #78909C;}
+        .islamic-pattern {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFC107' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10S65.523 70 60 70s-10-4.477-10-10zm0 0c0 5.523-4.477 10-10 10S30 55.523 30 50s4.477-10 10-10 10 4.477 10 10zm10 10c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm-20 0c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zM50 30c0-5.523 4.477-10 10-10s10 4.477 10 10S65.523 50 60 50s-10-4.477-10-10zm0 0c0 5.523-4.477 10-10 10S30 35.523 30 30s4.477-10 10-10 10 4.477 10 10zm10 10c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm-20 0c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zM30 50c0-5.523 4.477-10 10-10s10 4.477 10 10S45.523 70 40 70s-10-4.477-10-10zm0 0c0 5.523-4.477 10-10 10S10 55.523 10 50s4.477-10 10-10 10 4.477 10 10zm10 10c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm-20 0c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zM30 30c0-5.523 4.477-10 10-10s10 4.477 10 10S45.523 50 40 50s-10-4.477-10-10zm0 0c0 5.523-4.477 10-10 10S10 35.523 10 30s4.477-10 10-10 10 4.477 10 10zm10 10c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm-20 0c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;z-index: 0;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen p-6 @container">
+<div class="mosque-bg"></div>
+<div class="islamic-pattern top-0 left-0"></div>
+<div class="islamic-pattern bottom-0 right-0 rotate-180"></div>
+<header class="w-full flex justify-between items-center px-4 py-3 sm:px-8 sm:py-6 relative z-10">
+<h1 class="header-title">Masjid Al-Hidayah</h1>
+</header>
+<main class="flex flex-col items-center justify-center flex-grow w-full relative z-10 px-4 py-2">
+<div class="text-center mb-4 sm:mb-6">
+<p class="countdown-text">Next Prayer <span class="countdown-prayer-name">ASR</span> in</p>
+</div>
+<div class="flex items-center space-x-2 sm:space-x-4 mb-6 sm:mb-8">
+<div class="countdown-timer-box">
+<div class="countdown-timer-value">01</div>
+<div class="countdown-timer-label">Hour</div>
+</div>
+<div class="text-4xl sm:text-5xl font-light text-gray-400 mx-1 sm:mx-2">:</div>
+<div class="countdown-timer-box">
+<div class="countdown-timer-value">23</div>
+<div class="countdown-timer-label">Minutes</div>
+</div>
+<div class="text-4xl sm:text-5xl font-light text-gray-400 mx-1 sm:mx-2">:</div>
+<div class="countdown-timer-box">
+<div class="countdown-timer-value">45</div>
+<div class="countdown-timer-label">Seconds</div>
+</div>
+</div>
+<div class="text-center mb-8 sm:mb-12">
+<p class="current-time-display">16:41</p>
+<div class="text-center">
+<p class="date-info">Monday, May 5, 2025</p>
+<p class="date-info text-sm">15 Dhu al-Qidah, 1446 AH</p>
+</div>
+</div>
+<div class="grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-6 gap-3 sm:gap-4 w-full max-w-6xl">
+<div class="prayer-grid-card">
+<p class="prayer-name">FAJR</p>
+<p class="prayer-time">04:15</p>
+<p class="prayer-iqamah-time">Iqamah: 04:45</p>
+</div>
+<div class="prayer-grid-card">
+<p class="prayer-name">SHURUQ</p>
+<p class="prayer-time">05:48</p>
+<p class="prayer-status">Sunrise</p>
+</div>
+<div class="prayer-grid-card">
+<p class="prayer-name">DHUHR</p>
+<p class="prayer-time">13:05</p>
+<p class="prayer-iqamah-time">Iqamah: 13:30</p>
+</div>
+<div class="prayer-grid-card next-prayer relative">
+<span class="absolute top-[-0.75rem] right-[-0.5rem] bg-amber-500 text-gray-900 text-xs font-bold px-2.5 py-1 rounded-full shadow-md transform rotate-6">NEXT</span>
+<p class="prayer-name">ASR</p>
+<p class="prayer-time">18:05</p>
+<p class="prayer-iqamah-time">Iqamah: 18:20</p>
+</div>
+<div class="prayer-grid-card">
+<p class="prayer-name">MAGHRIB</p>
+<p class="prayer-time">20:22</p>
+<p class="prayer-iqamah-time">Iqamah: Sunset + 5</p>
+</div>
+<div class="prayer-grid-card">
+<p class="prayer-name">ISHA</p>
+<p class="prayer-time">21:50</p>
+<p class="prayer-iqamah-time">Iqamah: 22:15</p>
+</div>
+</div>
+</main>
+<footer class="w-full text-center py-4 sm:py-6 relative z-10">
+<p class="footer-quote mb-1">"Indeed, prayer has been decreed upon the believers at specified times." - Quran 4:103</p>
+<p class="footer-note">SalahTracker TV v1.0 | Prayer times for London, UK</p>
+</footer>
+
+</body></html>
