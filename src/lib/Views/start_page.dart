@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
+import 'package:muslim_life_mosque_edition/ViewModels/start_page_view_model.dart';
+import 'package:stacked/stacked.dart';
 
-class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+class StartPage extends StackedView<StartPageViewModel> {
+  late StartPageViewModel pageViewModel;
+
+  StartPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(color: const Color(0xFF111111));
+  StartPageViewModel viewModelBuilder(BuildContext context) {
+    pageViewModel = StartPageViewModel();
+    pageViewModel.screenContext = context;
+    return pageViewModel;
   }
+
+  @override
+  void onViewModelReady(StartPageViewModel viewModel) async {}
+
+  @override
+  Widget builder(BuildContext context, StartPageViewModel viewModel, Widget? child) => Scaffold(
+    backgroundColor: AppColors.PageBackgroundColor,
+    body: Stack(children: [Text("Hello")]),
+  );
 }
