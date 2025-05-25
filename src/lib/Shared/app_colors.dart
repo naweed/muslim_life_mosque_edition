@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color PageBackgroundColor = Color(0xFFECE2C2);
+  static const Color StartPageBackgroundColor = Color(0xFF151A26);
   static const Color AppPrimaryColor = Color(0xFFF8F2DD);
   static const Color DarkGrayColor = Color(0xFF595E64);
   static const Color DarkAppColor = Color(0xFFD6C8B8);
@@ -11,8 +12,9 @@ class AppColors {
   static const Color DarkTextColor = Color(0xFF20263E);
   static const Color GrayTextColor = Color(0xFFD4D7D9);
   static const Color LightTextColor = Color(0xFFFFFFFF);
+  static const Color YellowTextColor = Color(0xFFFFD700);
 
-  static const Color LightIndicatorColor = Color(0xFFD6C8B8);
+  static const Color LightIndicatorColor = Color(0xAAFFD700);
   // static const Color DarkIndicatorColor = Color(0xFF054003);
 
   // static final Color ShadowColor = Colors.black.withValues(alpha: 0.1);

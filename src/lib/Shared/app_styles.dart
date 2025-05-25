@@ -4,6 +4,13 @@ import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 class AppStyles {
   // Text Styles
 
+  //Yellow Bold Text Styles
+  static const TextStyle YellowBold32TextStyle = TextStyle(
+    fontFamily: "BoldFont",
+    color: AppColors.YellowTextColor,
+    fontSize: 32,
+  );
+
   //Regular Light Text Styles
   // static const TextStyle RegularLight10TextStyle = TextStyle(
   //   fontFamily: "RegularFont",
