@@ -5,10 +5,10 @@ class AppStyles {
   // Text Styles
 
   //Yellow Extra Bold Text Styles
-  static const TextStyle YellowExtraBold36TextStyle = TextStyle(
+  static const TextStyle YellowExtraBold40TextStyle = TextStyle(
     fontFamily: "ExtraBoldFont",
     color: AppColors.YellowTextColor,
-    fontSize: 36,
+    fontSize: 40,
   );
 
   //Yellow Medium Styles
@@ -49,6 +49,11 @@ class AppStyles {
     fontFamily: "MediumFont",
     color: AppColors.LightTextColor,
     fontSize: 24,
+  );
+  static const TextStyle MediumLight18TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor,
+    fontSize: 18,
   );
 
   //Medium Dark Text Styles

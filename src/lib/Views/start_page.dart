@@ -53,10 +53,17 @@ class StartPage extends StackedView<StartPageViewModel> {
         Positioned(
           top: itemVerticalPaddingUnit,
           left: itemHorizontalPaddingUnit,
-          child: Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold36TextStyle),
+          child: Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold40TextStyle),
         ),
 
-        //Ayah at the bottom
+        // Time
+        Positioned(
+          top: itemVerticalPaddingUnit,
+          right: itemHorizontalPaddingUnit,
+          child: Text(viewModel.CurrentTime, style: AppStyles.YellowExtraBold40TextStyle),
+        ),
+
+        //Ayah and App Info at the bottom
         Positioned(
           bottom: itemVerticalPaddingUnit,
           left: itemHorizontalPaddingUnit,
