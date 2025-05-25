@@ -39,6 +39,10 @@ flutter:
     - assets/images/
 
   fonts:
+    - family: ExtraBoldFont
+      fonts:
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+
     - family: BoldFont
       fonts:
         - asset: assets/fonts/Montserrat-Bold.ttf

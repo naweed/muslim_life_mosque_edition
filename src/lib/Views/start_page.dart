@@ -9,6 +9,9 @@ import 'package:stacked/stacked.dart';
 class StartPage extends StackedView<StartPageViewModel> {
   late StartPageViewModel pageViewModel;
 
+  double itemHorizontalPaddingUnit = 24.0;
+  double itemVerticalPaddingUnit = 16.0;
+
   StartPage({super.key});
 
   @override
@@ -46,10 +49,38 @@ class StartPage extends StackedView<StartPageViewModel> {
     //Return Main Content
     return Stack(
       children: [
+        //Mosque Name on Top Left
         Positioned(
-          top: 32,
-          left: 32,
-          child: Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowBold32TextStyle),
+          top: itemVerticalPaddingUnit,
+          left: itemHorizontalPaddingUnit,
+          child: Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold36TextStyle),
+        ),
+
+        //Ayah at the bottom
+        Positioned(
+          bottom: itemVerticalPaddingUnit,
+          left: itemHorizontalPaddingUnit,
+          right: itemHorizontalPaddingUnit,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "\"Indeed, prayer has been decreed upon the believers at specified times.\"",
+                    style: AppStyles.YellowBold16TextStyle,
+                  ),
+                  Text(" - Sura An-Nisa (4:103)", style: AppStyles.YellowRegular16TextStyle),
+                ],
+              ),
+
+              Text(
+                "Masjid Pulse TV v1.0  |  Prayer times for ${viewModel.mosque.addressCity}, ${viewModel.mosque.addressCountryName}",
+                style: AppStyles.RegularLight14TextStyle,
+              ),
+            ],
+          ),
         ),
       ],
     );
