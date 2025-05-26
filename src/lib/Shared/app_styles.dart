@@ -5,10 +5,15 @@ class AppStyles {
   // Text Styles
 
   //Yellow Extra Bold Text Styles
-  static const TextStyle YellowExtraBold40TextStyle = TextStyle(
+  static const TextStyle YellowExtraBold48TextStyle = TextStyle(
     fontFamily: "ExtraBoldFont",
     color: AppColors.YellowTextColor,
-    fontSize: 40,
+    fontSize: 48,
+  );
+  static const TextStyle YellowExtraBold36TextStyle = TextStyle(
+    fontFamily: "ExtraBoldFont",
+    color: AppColors.YellowTextColor,
+    fontSize: 36,
   );
   static const TextStyle YellowExtraBold32TextStyle = TextStyle(
     fontFamily: "ExtraBoldFont",
@@ -22,10 +27,10 @@ class AppStyles {
   );
 
   //Yellow Medium Styles
-  static const TextStyle YellowMedium6TextStyle = TextStyle(
+  static const TextStyle YellowMedium14TextStyle = TextStyle(
     fontFamily: "MediumFont",
     color: AppColors.YellowTextColor,
-    fontSize: 16,
+    fontSize: 14,
   );
 
   //Yellow Regular Styles
@@ -36,6 +41,11 @@ class AppStyles {
   );
 
   //Regular Light Text Styles
+  static const TextStyle RegularLight10TextStyle = TextStyle(
+    fontFamily: "RegularFont",
+    color: AppColors.LightTextColor,
+    fontSize: 10,
+  );
   static const TextStyle RegularLight14TextStyle = TextStyle(
     fontFamily: "RegularFont",
     color: AppColors.LightTextColor,
@@ -69,6 +79,11 @@ class AppStyles {
     fontFamily: "MediumFont",
     color: AppColors.LightTextColor,
     fontSize: 20,
+  );
+  static TextStyle MediumLighter18TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor.withValues(alpha: 0.6),
+    fontSize: 18,
   );
   static const TextStyle MediumLight18TextStyle = TextStyle(
     fontFamily: "MediumFont",
@@ -186,7 +201,7 @@ class AppStyles {
   static const TextStyle ClockTextStyle = TextStyle(
     fontFamily: "ClockFont",
     color: AppColors.LightTextColor,
-    fontSize: 40,
+    fontSize: 36,
   );
 
   // Button Styles

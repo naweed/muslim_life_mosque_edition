@@ -70,7 +70,7 @@ class StartPage extends StackedView<StartPageViewModel> {
         //Mosque Name and Current Time Area
         auto,
         //Spacer
-        8.px,
+        itemVerticalPaddingUnit.px,
         //Prayer Information Area
         1.fr,
         //Spacer
@@ -95,7 +95,7 @@ class StartPage extends StackedView<StartPageViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Mosque Name
-            Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold40TextStyle),
+            Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold36TextStyle),
             //Time
             Text(viewModel.CurrentTime, style: AppStyles.ClockTextStyle),
           ],
@@ -111,16 +111,16 @@ class StartPage extends StackedView<StartPageViewModel> {
               children: [
                 Text(
                   "\"Indeed, prayer has been decreed upon the believers at specified times.\"",
-                  style: AppStyles.YellowMedium6TextStyle,
+                  style: AppStyles.YellowMedium14TextStyle,
                 ),
-                Text(" - Sura An-Nisa (4:103)", style: AppStyles.RegularLight16TextStyle),
+                Text(" - Sura An-Nisa (4:103)", style: AppStyles.RegularLight14TextStyle),
               ],
             ),
 
             //App Info
             Text(
               "Masjid Pulse TV v1.0  |  Prayer times for ${viewModel.mosque.addressCity}, ${viewModel.mosque.addressCountryName}",
-              style: AppStyles.RegularLight14TextStyle,
+              style: AppStyles.RegularLight10TextStyle,
             ),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 9),
@@ -133,11 +133,11 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Gregorian Date
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text(viewModel.CurrentDateGregorian, style: AppStyles.MediumLight20TextStyle)],
+              children: [Text(viewModel.CurrentDateGregorian, style: AppStyles.MediumLighter18TextStyle)],
             ),
 
             //Hijri Date
-            Text("  |  ${viewModel.CurrentDateHijri}", style: AppStyles.MediumLight20TextStyle),
+            Text("  |  ${viewModel.CurrentDateHijri}", style: AppStyles.MediumLighter18TextStyle),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 5),
 
@@ -209,12 +209,12 @@ class StartPage extends StackedView<StartPageViewModel> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(viewModel.NextPrayerDisplayName1, style: AppStyles.RegularLight18TextStyle),
+                Text(viewModel.NextPrayerDisplayName1, style: AppStyles.MediumLight18TextStyle),
                 Text(
                   viewModel.NextPrayerDisplayName2,
                   style: AppStyles.YellowExtraBold32TextStyle.copyWith(height: 1.2),
                 ),
-                Text(" in", style: AppStyles.RegularLight18TextStyle),
+                Text(" in", style: AppStyles.MediumLight18TextStyle),
               ],
             ),
             12.toVerticalSpacer(),
@@ -227,11 +227,11 @@ class StartPage extends StackedView<StartPageViewModel> {
                 children: [
                   _buildTimerBox(time != null ? NumberFormat("00").format(time.hours ?? 0) : "00", 'Hour(s)'),
                   8.toHorizontalSpacer(),
-                  const Text(':', style: AppStyles.YellowExtraBold28TextStyle),
+                  Text(':', style: AppStyles.YellowExtraBold28TextStyle).withLTRBPadding(0, 0, 0, 16),
                   8.toHorizontalSpacer(),
                   _buildTimerBox(time != null ? NumberFormat("00").format(time.min ?? 0) : "00", 'Minute(s)'),
                   8.toHorizontalSpacer(),
-                  const Text(':', style: AppStyles.YellowExtraBold28TextStyle),
+                  Text(':', style: AppStyles.YellowExtraBold28TextStyle).withLTRBPadding(0, 0, 0, 16),
                   8.toHorizontalSpacer(),
                   _buildTimerBox(time != null ? NumberFormat("00").format(time.sec ?? 0) : "00", 'Second(s)'),
                 ],
@@ -245,7 +245,8 @@ class StartPage extends StackedView<StartPageViewModel> {
 
   Widget _buildTimerBox(String value, String label) {
     return Container(
-      width: 96,
+      width: 104,
+      height: 116,
       padding: (8, 12).withSymetricPadding(),
       decoration: BoxDecoration(
         color: const Color(0xFF263238).withValues(alpha: 0.7),
@@ -258,7 +259,7 @@ class StartPage extends StackedView<StartPageViewModel> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(value, style: AppStyles.YellowExtraBold40TextStyle),
+          Text(value, style: AppStyles.YellowExtraBold48TextStyle),
           Text(
             label,
             style: AppStyles.MediumLight12TextStyle,
