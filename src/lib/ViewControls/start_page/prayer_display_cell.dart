@@ -7,6 +7,7 @@ import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 class PrayerDisplayCell extends StatelessWidget {
   final String prayerName;
   final String prayerTime;
+  final String iqamaTime;
   bool isCurrent;
   bool isNext;
 
@@ -14,6 +15,7 @@ class PrayerDisplayCell extends StatelessWidget {
     super.key,
     required this.prayerName,
     required this.prayerTime,
+    required this.iqamaTime,
     required this.isCurrent,
     required this.isNext,
   });
@@ -74,7 +76,7 @@ class PrayerDisplayCell extends StatelessWidget {
                 ),
                 2.toVerticalSpacer(),
                 Text(
-                  "Iqama: ",
+                  iqamaTime == "N/A" ? "☀️" : "Iqama: $iqamaTime",
                   style: AppStyles.RegularLight14TextStyle.copyWith(
                     color: isNext ? AppColors.PrayerBoxYellowColor : AppColors.LightTextColor,
                   ),

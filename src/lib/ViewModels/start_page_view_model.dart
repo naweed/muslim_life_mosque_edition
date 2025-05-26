@@ -28,12 +28,48 @@ class StartPageViewModel extends AppViewModel {
 
   PrayerTimes? PrayTimes;
   List<AppPrayerTime> AllPrayerTimes = [
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: true, isNext: false),
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: true),
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: true,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: false,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: false,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: false,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: false,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
+    AppPrayerTime(
+      prayerName: "",
+      prayerTime: DateTime.now(),
+      isCurrent: false,
+      isNext: false,
+      iqamaTime: DateTime.now(),
+    ),
   ];
 
   StartPageViewModel() : super() {
@@ -120,6 +156,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.fajr,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.fajr) == 0,
         isNext: isSameDay && nextPrayerName == "Fajr",
+        iqamaTime: PrayTimes!.fajr.add(mosque.adjustmentFajrIqamah!.minutes),
       ),
     );
     AllPrayerTimes.add(
@@ -128,6 +165,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.dhuhr,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.dhuhr) == 0,
         isNext: isSameDay && nextPrayerName == "Dhuhr",
+        iqamaTime: PrayTimes!.dhuhr.add(mosque.adjustmentDhuhrIqamah!.minutes),
       ),
     );
     AllPrayerTimes.add(
@@ -136,6 +174,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.asr,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.asr) == 0,
         isNext: isSameDay && nextPrayerName == "Asr",
+        iqamaTime: PrayTimes!.asr.add(mosque.adjustmentAsrIqamah!.minutes),
       ),
     );
     AllPrayerTimes.add(
@@ -144,6 +183,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.maghrib,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.maghrib) == 0,
         isNext: isSameDay && nextPrayerName == "Maghrib",
+        iqamaTime: PrayTimes!.maghrib.add(mosque.adjustmentMaghribIqamah!.minutes),
       ),
     );
     AllPrayerTimes.add(
@@ -152,6 +192,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.isha,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.isha) == 0,
         isNext: isSameDay && nextPrayerName == "Isha",
+        iqamaTime: PrayTimes!.isha.add(mosque.adjustmentIshaIqamah!.minutes),
       ),
     );
     AllPrayerTimes.add(
@@ -160,6 +201,7 @@ class StartPageViewModel extends AppViewModel {
         prayerTime: PrayTimes!.sunrise,
         isCurrent: _currentPrayerTime.compareTo(PrayTimes!.sunrise) == 0,
         isNext: isSameDay && nextPrayerName == "Shuruq",
+        iqamaTime: PrayTimes!.sunrise,
       ),
     );
 

@@ -146,6 +146,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[0].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[0].isCurrent,
               isNext: viewModel.AllPrayerTimes[0].isNext,
+              iqamaTime: viewModel.AllPrayerTimes[0].iqamaTimeDisplay,
             ),
 
             //Sunrise
@@ -154,6 +155,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[5].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[5].isCurrent,
               isNext: viewModel.AllPrayerTimes[5].isNext,
+              iqamaTime: "N/A",
             ),
 
             //Dhuhr
@@ -162,6 +164,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[1].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[1].isCurrent,
               isNext: viewModel.AllPrayerTimes[1].isNext,
+              iqamaTime: viewModel.AllPrayerTimes[1].iqamaTimeDisplay,
             ),
 
             //Asr
@@ -170,6 +173,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[2].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[2].isCurrent,
               isNext: viewModel.AllPrayerTimes[2].isNext,
+              iqamaTime: viewModel.AllPrayerTimes[2].iqamaTimeDisplay,
             ),
 
             //Maghrib
@@ -178,6 +182,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[3].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[3].isCurrent,
               isNext: viewModel.AllPrayerTimes[3].isNext,
+              iqamaTime: viewModel.AllPrayerTimes[3].iqamaTimeDisplay,
             ),
 
             //Isha
@@ -186,6 +191,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               prayerTime: viewModel.AllPrayerTimes[4].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[4].isCurrent,
               isNext: viewModel.AllPrayerTimes[4].isNext,
+              iqamaTime: viewModel.AllPrayerTimes[4].iqamaTimeDisplay,
             ),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 7),
