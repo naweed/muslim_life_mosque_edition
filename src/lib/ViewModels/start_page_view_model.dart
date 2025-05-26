@@ -19,6 +19,7 @@ class StartPageViewModel extends AppViewModel {
   late Mosque mosque;
 
   late CountdownTimerController countrDownController;
+  late Timer clockTimer;
 
   late DateTime _currentDateGregorian;
   late String CurrentDateHijri;
@@ -101,10 +102,7 @@ class StartPageViewModel extends AppViewModel {
 
       //Set the Time and Start Timer
       setCurrentTime();
-      Timer.periodic(1.seconds, (Timer t) {
-        setCurrentTime();
-        rebuildUi();
-      });
+      setTimer();
 
       DataLoaded = true;
     } catch (ex) {
@@ -114,6 +112,17 @@ class StartPageViewModel extends AppViewModel {
     } finally {
       setDataLodingIndicators(false);
     }
+  }
+
+  void setTimer() {
+    try {
+      clockTimer.cancel();
+    } catch (ex) {}
+
+    clockTimer = Timer.periodic(1.seconds, (Timer t) {
+      setCurrentTime();
+      rebuildUi();
+    });
   }
 
   Future<void> getTodaysPrayerTimes() async {
@@ -255,6 +264,9 @@ class StartPageViewModel extends AppViewModel {
 
         //Get Today's Prayer Times
         await getTodaysPrayerTimes();
+
+        //Set Clock Timer
+        setTimer();
 
         DataLoaded = true;
       } catch (ex) {
