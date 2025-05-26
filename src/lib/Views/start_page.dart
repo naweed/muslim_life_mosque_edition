@@ -49,8 +49,28 @@ class StartPage extends StackedView<StartPageViewModel> {
 
     //Return Main Content
     return LayoutGrid(
-      columnSizes: [itemHorizontalPaddingUnit.px, 1.fr, itemHorizontalPaddingUnit.px],
-      rowSizes: [itemVerticalPaddingUnit.px, auto, 1.fr, auto, itemVerticalPaddingUnit.px],
+      columnSizes: [
+        //Left Spacer
+        itemHorizontalPaddingUnit.px,
+        //Main Content Area
+        1.fr,
+        //Right Spacer
+        itemHorizontalPaddingUnit.px,
+      ],
+      rowSizes: [
+        //Top Spacer
+        itemVerticalPaddingUnit.px,
+        //Mosque Name and Current Time Area
+        auto,
+        //Prayer Information Area
+        1.fr,
+        //Current Date Area
+        auto,
+        //Quran Ayah and App Information Area
+        auto,
+        //Bottom Spacer
+        itemVerticalPaddingUnit.px,
+      ],
       children: [
         //Top Header (Mosque Name and Time)
         Row(
@@ -84,7 +104,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               style: AppStyles.RegularLight14TextStyle,
             ),
           ],
-        ).withGridPlacement(columnStart: 1, rowStart: 3),
+        ).withGridPlacement(columnStart: 1, rowStart: 4),
       ],
     );
   }

@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:muslim_life_mosque_edition/Helpers/hijri_date_helper.dart';
+import 'package:muslim_life_mosque_edition/Helpers/prayer_times_helper.dart';
 import 'package:muslim_life_mosque_edition/Models/mosque.dart';
 import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
@@ -18,6 +20,8 @@ class StartPageViewModel extends AppViewModel {
   late String CurrentDateHijri;
   late String CurrentTime;
   String get CurrentDateGregorian => DateFormat('EEEE, MMM d, yyyy').format(_currentDateGregorian);
+
+  PrayerTimes? PrayTimes;
 
   StartPageViewModel() : super() {
     this.Title = "Prayer Times";
@@ -37,6 +41,9 @@ class StartPageViewModel extends AppViewModel {
       //Get Curent Date
       getCurrentDate();
 
+      //Get Today's Prayer Times
+      await getTodaysPrayerTimes();
+
       //Set the Time and Start Timer
       setCurrentTime();
       Timer.periodic(1.seconds, (Timer t) {
@@ -52,6 +59,35 @@ class StartPageViewModel extends AppViewModel {
     } finally {
       setDataLodingIndicators(false);
     }
+  }
+
+  Future<void> getTodaysPrayerTimes() async {
+    //Get Prayer Times
+    PrayTimes = await PrayerTimesHelper.getPrayerTimes(
+      theDate: _currentDateGregorian,
+      userLat: mosque.latitude!,
+      userLon: mosque.longitude!,
+      prayerCalcMethod: mosque.prayerCalcMethod!,
+      asrCalculationMethod: mosque.asrCalcMethod!,
+      fajrAdjustment: mosque.adjustmentFajr!,
+      sunriseAdjustment: mosque.adjustmentSunrise!,
+      dhuhrAdjustment: mosque.adjustmentDhuhr!,
+      asrAdjustment: mosque.adjustmentAsr!,
+      maghribAdjustment: mosque.adjustmentMaghrib!,
+      ishaAdjustment: mosque.adjustmentIsha!,
+    );
+
+    ////TODO
+    // //Get Next Prayer Time
+    // var (nextPrayerName, nextPrayerTime) = await PrayerTimesHelper.getNextPrayer(PrayTimes!, _currentDateGregorian);
+    // NextPrayerName = nextPrayerName;
+    // NextPrayerTime = nextPrayerTime;
+
+    // try {
+    //   countrDownController.dispose();
+    // } catch (ex) {}
+
+    // countrDownController = CountdownTimerController(endTime: NextPrayerTime.millisecondsSinceEpoch, onEnd: reloadData);
   }
 
   void setCurrentTime() {
