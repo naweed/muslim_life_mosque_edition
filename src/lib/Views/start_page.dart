@@ -116,7 +116,7 @@ class StartPage extends StackedView<StartPageViewModel> {
                 Text(" - Sura An-Nisa (4:103)", style: AppStyles.RegularLight14TextStyle),
               ],
             ),
-
+            //2.toVerticalSpacer(),
             //App Info
             Text(
               "Masjid Pulse TV v1.0  |  Prayer times for ${viewModel.mosque.addressCity}, ${viewModel.mosque.addressCountryName}",
@@ -225,15 +225,15 @@ class StartPage extends StackedView<StartPageViewModel> {
               widgetBuilder: (_, time) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildTimerBox(time != null ? NumberFormat("00").format(time.hours ?? 0) : "00", 'Hour(s)'),
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.hours ?? 0) : "00", "Hour(s)"),
                   8.toHorizontalSpacer(),
-                  Text(':', style: AppStyles.YellowExtraBold28TextStyle).withLTRBPadding(0, 0, 0, 16),
+                  Text(':', style: AppStyles.YellowClock44TextStyle).withLTRBPadding(0, 0, 0, 16),
                   8.toHorizontalSpacer(),
-                  _buildTimerBox(time != null ? NumberFormat("00").format(time.min ?? 0) : "00", 'Minute(s)'),
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.min ?? 0) : "00", "Minute(s)"),
                   8.toHorizontalSpacer(),
-                  Text(':', style: AppStyles.YellowExtraBold28TextStyle).withLTRBPadding(0, 0, 0, 16),
+                  Text(':', style: AppStyles.YellowClock44TextStyle).withLTRBPadding(0, 0, 0, 16),
                   8.toHorizontalSpacer(),
-                  _buildTimerBox(time != null ? NumberFormat("00").format(time.sec ?? 0) : "00", 'Second(s)'),
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.sec ?? 0) : "00", "Second(s)"),
                 ],
               ),
             ),
@@ -259,17 +259,8 @@ class StartPage extends StackedView<StartPageViewModel> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(value, style: AppStyles.YellowExtraBold48TextStyle),
-          Text(
-            label,
-            style: AppStyles.MediumLight12TextStyle,
-            // style: GoogleFonts.openSans(
-            //   fontSize: 14.4, // font-size: 0.9rem; [cite: 15]
-            //   textStyle: const TextStyle(
-            //     color: Color(0xFF90A4AE), // color: #90A4AE; [cite: 15]
-            //   ),
-            // ),
-          ),
+          Text(value, style: AppStyles.YellowClock44TextStyle),
+          Text(label, style: AppStyles.MediumLight12TextStyle),
         ],
       ),
     );

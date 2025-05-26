@@ -113,53 +113,12 @@ class AppStyles {
     fontSize: 24,
   );
 
-  //Light Light Text Styles
-  // static const TextStyle LightLight12TextStyle = TextStyle(
-  //   fontFamily: "LightFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 12,
-  // );
-
-  // //Bold Light Text Styles
-  // static const TextStyle BoldLight40TextStyle = TextStyle(
-  //   fontFamily: "BoldFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 40,
-  // );
-
   //Bold Dark Text Styles
   static const TextStyle BoldDark10TextStyle = TextStyle(
     fontFamily: "BoldFont",
     color: AppColors.DarkTextColor,
     fontSize: 10,
   );
-
-  //Bold Narrow Light Text Styles
-  // static const TextStyle BoldNarrowLight13TextStyle = TextStyle(
-  //   fontFamily: "BoldNarrowFont",
-  //   color: AppColors.LightTextColor,
-  //   fontSize: 13,
-  // );
-
-  //Arabic Fonts
-  // static const TextStyle ArabicHeaderBoldDark18TextStyle = TextStyle(
-  //   fontFamily: "ArabicHeaderFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 18,
-  //   fontWeight: FontWeight.w600,
-  // );
-  // static const TextStyle ArabicHeaderExtraBoldDark24TextStyle = TextStyle(
-  //   fontFamily: "ArabicHeaderFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 24,
-  //   fontWeight: FontWeight.w800,
-  // );
-  // static const TextStyle QuranDark34TextStyle = TextStyle(
-  //   fontFamily: "QuranFont",
-  //   color: AppColors.DarkTextColor,
-  //   fontSize: 34,
-  //   fontWeight: FontWeight.w400,
-  // );
 
   //Other Text Styles
   static const TextStyle ToastTextStyle = TextStyle(
@@ -202,6 +161,11 @@ class AppStyles {
     fontFamily: "ClockFont",
     color: AppColors.LightTextColor,
     fontSize: 36,
+  );
+  static const TextStyle YellowClock44TextStyle = TextStyle(
+    fontFamily: "ClockFont",
+    color: AppColors.YellowTextColor,
+    fontSize: 44,
   );
 
   // Button Styles

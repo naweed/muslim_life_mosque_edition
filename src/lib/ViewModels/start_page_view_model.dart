@@ -221,8 +221,8 @@ class StartPageViewModel extends AppViewModel {
       NextPrayerDisplayName2 = NextPrayerName.toUpperCase();
     } else if (AllPrayerTimes.any((prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime))) {
       //Iqama Times
-      NextPrayerDisplayName1 = "Iqama";
-      NextPrayerDisplayName2 = "";
+      NextPrayerDisplayName1 = "";
+      NextPrayerDisplayName2 = "Iqama";
       NextPrayerTime = AllPrayerTimes.where(
         (prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime),
       ).first.iqamaTime;
@@ -241,19 +241,29 @@ class StartPageViewModel extends AppViewModel {
   }
 
   Future<void> reloadData() async {
-    Future.delayed(3.seconds, () async {
-      //Load the Mosque Details
-      mosqueCode = await appSettingsService.getMosqueCode();
-      mosque = await appApiService.getMosqueDetails(mosqueCode);
+    Future.delayed(5.seconds, () async {
+      try {
+        LoadingText = "";
+        setDataLodingIndicators(true);
 
-      //Get Curent Date
-      getCurrentDate();
+        //Load the Mosque Details
+        mosqueCode = await appSettingsService.getMosqueCode();
+        mosque = await appApiService.getMosqueDetails(mosqueCode);
 
-      //Get Today's Prayer Times
-      await getTodaysPrayerTimes();
+        //Get Curent Date
+        getCurrentDate();
 
-      //Rebuild the UI
-      rebuildUi();
+        //Get Today's Prayer Times
+        await getTodaysPrayerTimes();
+
+        DataLoaded = true;
+      } catch (ex) {
+        IsErrorState = true;
+        ErrorMessage =
+            "Something went wrong. If the problem persists, plz contact support at ${AppConstants.SupportEmailAddress}.";
+      } finally {
+        setDataLodingIndicators(false);
+      }
     });
   }
 
