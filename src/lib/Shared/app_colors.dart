@@ -29,4 +29,7 @@ class AppColors {
 
   static const Color PrayerBoxYellowColor = Color(0xFFFFC107);
   static const Color PrayerBoxDarkColor = Color(0xFF37474F);
+
+  static const Color PrayerBoxActiveBorderColor = Color(0xFFFFC107);
+  static const Color PrayerBoxInactiveBorderColor = Color(0xFF607D8B);
 }
