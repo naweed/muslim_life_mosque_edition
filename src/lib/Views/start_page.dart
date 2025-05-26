@@ -75,7 +75,7 @@ class StartPage extends StackedView<StartPageViewModel> {
                   "\"Indeed, prayer has been decreed upon the believers at specified times.\"",
                   style: AppStyles.YellowBold16TextStyle,
                 ),
-                Text(" - Sura An-Nisa (4:103)", style: AppStyles.YellowRegular16TextStyle),
+                Text(" - Sura An-Nisa (4:103)", style: AppStyles.RegularLight16TextStyle),
               ],
             ),
 
