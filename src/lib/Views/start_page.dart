@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/error_indicator.dart';
@@ -47,48 +48,43 @@ class StartPage extends StackedView<StartPageViewModel> {
     }
 
     //Return Main Content
-    return Stack(
+    return LayoutGrid(
+      columnSizes: [itemHorizontalPaddingUnit.px, 1.fr, itemHorizontalPaddingUnit.px],
+      rowSizes: [itemVerticalPaddingUnit.px, auto, 1.fr, auto, itemVerticalPaddingUnit.px],
       children: [
-        //Mosque Name on Top Left
-        Positioned(
-          top: itemVerticalPaddingUnit,
-          left: itemHorizontalPaddingUnit,
-          child: Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold40TextStyle),
-        ),
+        //Top Header (Mosque Name and Time)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //Mosque Name
+            Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold40TextStyle),
+            //Time
+            Text(viewModel.CurrentTime, style: AppStyles.ClockTextStyle),
+          ],
+        ).withGridPlacement(columnStart: 1, rowStart: 1),
 
-        // Time
-        Positioned(
-          top: itemVerticalPaddingUnit,
-          right: itemHorizontalPaddingUnit,
-          child: Text(viewModel.CurrentTime, style: AppStyles.YellowExtraBold40TextStyle),
-        ),
+        //Bottom Ayah and App Info
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "\"Indeed, prayer has been decreed upon the believers at specified times.\"",
+                  style: AppStyles.YellowBold16TextStyle,
+                ),
+                Text(" - Sura An-Nisa (4:103)", style: AppStyles.YellowRegular16TextStyle),
+              ],
+            ),
 
-        //Ayah and App Info at the bottom
-        Positioned(
-          bottom: itemVerticalPaddingUnit,
-          left: itemHorizontalPaddingUnit,
-          right: itemHorizontalPaddingUnit,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "\"Indeed, prayer has been decreed upon the believers at specified times.\"",
-                    style: AppStyles.YellowBold16TextStyle,
-                  ),
-                  Text(" - Sura An-Nisa (4:103)", style: AppStyles.YellowRegular16TextStyle),
-                ],
-              ),
-
-              Text(
-                "Masjid Pulse TV v1.0  |  Prayer times for ${viewModel.mosque.addressCity}, ${viewModel.mosque.addressCountryName}",
-                style: AppStyles.RegularLight14TextStyle,
-              ),
-            ],
-          ),
-        ),
+            Text(
+              "Masjid Pulse TV v1.0  |  Prayer times for ${viewModel.mosque.addressCity}, ${viewModel.mosque.addressCountryName}",
+              style: AppStyles.RegularLight14TextStyle,
+            ),
+          ],
+        ).withGridPlacement(columnStart: 1, rowStart: 3),
       ],
     );
   }

@@ -70,11 +70,11 @@ class AppStyles {
   //   fontSize: 12,
   // );
 
-  //Bold Light Text Styles
-  // static const TextStyle BoldLight10TextStyle = TextStyle(
+  // //Bold Light Text Styles
+  // static const TextStyle BoldLight40TextStyle = TextStyle(
   //   fontFamily: "BoldFont",
   //   color: AppColors.LightTextColor,
-  //   fontSize: 10,
+  //   fontSize: 40,
   // );
 
   //Bold Dark Text Styles
@@ -147,6 +147,11 @@ class AppStyles {
     fontFamily: "MediumFont",
     color: AppColors.LinkButtonTextColor,
     fontSize: 18,
+  );
+  static const TextStyle ClockTextStyle = TextStyle(
+    fontFamily: "ClockFont",
+    color: AppColors.LightTextColor,
+    fontSize: 40,
   );
 
   // Button Styles
