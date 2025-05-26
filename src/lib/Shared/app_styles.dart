@@ -12,8 +12,8 @@ class AppStyles {
   );
 
   //Yellow Medium Styles
-  static const TextStyle YellowBold16TextStyle = TextStyle(
-    fontFamily: "BoldFont",
+  static const TextStyle YellowMedium6TextStyle = TextStyle(
+    fontFamily: "MediumFont",
     color: AppColors.YellowTextColor,
     fontSize: 16,
   );
@@ -50,10 +50,20 @@ class AppStyles {
     color: AppColors.LightTextColor,
     fontSize: 24,
   );
+  static const TextStyle MediumLight20TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor,
+    fontSize: 20,
+  );
   static const TextStyle MediumLight18TextStyle = TextStyle(
     fontFamily: "MediumFont",
     color: AppColors.LightTextColor,
     fontSize: 18,
+  );
+  static const TextStyle MediumLight16TextStyle = TextStyle(
+    fontFamily: "MediumFont",
+    color: AppColors.LightTextColor,
+    fontSize: 16,
   );
 
   //Medium Dark Text Styles

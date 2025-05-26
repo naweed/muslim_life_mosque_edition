@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:muslim_life_mosque_edition/Helpers/hijri_date_helper.dart';
 import 'package:muslim_life_mosque_edition/Helpers/prayer_times_helper.dart';
+import 'package:muslim_life_mosque_edition/Models/app_prayer_time.dart';
 import 'package:muslim_life_mosque_edition/Models/mosque.dart';
 import 'package:muslim_life_mosque_edition/Services/app_api_service.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
@@ -22,6 +23,14 @@ class StartPageViewModel extends AppViewModel {
   String get CurrentDateGregorian => DateFormat('EEEE, MMM d, yyyy').format(_currentDateGregorian);
 
   PrayerTimes? PrayTimes;
+  List<AppPrayerTime> AllPrayerTimes = [
+    AppPrayerTime(prayerName: "Fajr", prayerTime: DateTime.now(), isCurrent: true, isNext: false),
+    AppPrayerTime(prayerName: "Dhuhr", prayerTime: DateTime.now(), isCurrent: false, isNext: true),
+    AppPrayerTime(prayerName: "Asr", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "Maghrib", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "Isha", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "Sunrise", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+  ];
 
   StartPageViewModel() : super() {
     this.Title = "Prayer Times";
