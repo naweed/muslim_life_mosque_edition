@@ -13,6 +13,7 @@ class AppColors {
   static const Color GrayTextColor = Color(0xFFD4D7D9);
   static const Color LightTextColor = Color(0xFFFFFFFF);
   static const Color YellowTextColor = Color(0xFFFFD700);
+  static const Color LightYellowTextColor = Color(0xFFFFECB3);
 
   static const Color LightIndicatorColor = Color(0xAAFFD700);
   // static const Color DarkIndicatorColor = Color(0xFF054003);
@@ -29,6 +30,7 @@ class AppColors {
 
   static const Color PrayerBoxYellowColor = Color(0xFFFFC107);
   static const Color PrayerBoxDarkColor = Color(0xFF37474F);
+  static const Color PrayerBoxNextColor = Color(0xFFf59e0b);
 
   static const Color PrayerBoxActiveBorderColor = Color(0xFFFFC107);
   static const Color PrayerBoxInactiveBorderColor = Color(0xFF607D8B);

@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class PrayerTimesHelper {
   static Future<PrayerTimes?> getPrayerTimes({
@@ -164,11 +165,7 @@ class PrayerTimesHelper {
         ),
       ),
       "Shia Ithna-Ashari, Leva Institute, Qum" =>
-        CalculationParameters(
-          fajrAngle: 17.7,
-          ishaAngle: 14,
-          maghribAngle: 4.5,
-        ).withMethodAdjustments(
+        CalculationParameters(fajrAngle: 17.7, ishaAngle: 14, maghribAngle: 4.5).withMethodAdjustments(
           PrayerAdjustments(
             fajr: 0 + fajrAdjustment,
             dhuhr: 0 + dhuhrAdjustment,
@@ -202,77 +199,106 @@ class PrayerTimesHelper {
     };
   }
 
-  // static Future<(String, DateTime)> getNextPrayer(PrayerTimes prayers, DateTime currentDateTime) async {
-  //   String? prayerName;
-  //   DateTime? prayerTime;
+  static Future<(String, DateTime, bool)> getNextPrayer({
+    required PrayerTimes prayers,
+    required DateTime theDate,
+    required double userLat,
+    required double userLon,
+    required String prayerCalcMethod,
+    required String asrCalculationMethod,
+    required int fajrAdjustment,
+    required int sunriseAdjustment,
+    required int dhuhrAdjustment,
+    required int asrAdjustment,
+    required int maghribAdjustment,
+    required int ishaAdjustment,
+  }) async {
+    String? prayerName;
+    DateTime? prayerTime;
+    bool isSameDay = true;
 
-  //   var nextPrayer = prayers.nextPrayerByDateTime(currentDateTime);
+    var nextPrayer = prayers.nextPrayerByDateTime(theDate);
 
-  //   if (nextPrayer == Prayer.none) {
-  //     var nextDayPrayers = await getPrayerTimes(currentDateTime.add(Duration(days: 1)));
+    if (nextPrayer == Prayer.none) {
+      var nextDayPrayers = await getPrayerTimes(
+        theDate: theDate.add(1.days),
+        userLat: userLat,
+        userLon: userLon,
+        prayerCalcMethod: prayerCalcMethod,
+        asrCalculationMethod: asrCalculationMethod,
+        fajrAdjustment: fajrAdjustment,
+        sunriseAdjustment: sunriseAdjustment,
+        dhuhrAdjustment: dhuhrAdjustment,
+        asrAdjustment: asrAdjustment,
+        maghribAdjustment: maghribAdjustment,
+        ishaAdjustment: ishaAdjustment,
+      );
 
-  //     prayerName = "Fajr";
-  //     prayerTime = nextDayPrayers!.fajr;
-  //   } else {
-  //     if (nextPrayer == Prayer.sunrise) {
-  //       nextPrayer = Prayer.dhuhr;
-  //     }
+      prayerName = "Fajr";
+      prayerTime = nextDayPrayers!.fajr;
+      isSameDay = false;
+    } else {
+      if (nextPrayer == Prayer.sunrise) {
+        nextPrayer = Prayer.dhuhr;
+      }
 
-  //     switch (nextPrayer) {
-  //       case Prayer.fajr:
-  //         prayerName = "Fajr";
-  //         prayerTime = prayers.fajr;
-  //       case Prayer.dhuhr:
-  //         prayerName = "Dhuhr";
-  //         prayerTime = prayers.dhuhr;
-  //       case Prayer.asr:
-  //         prayerName = "Asr";
-  //         prayerTime = prayers.asr;
-  //       case Prayer.maghrib:
-  //         prayerName = "Maghrib";
-  //         prayerTime = prayers.maghrib;
-  //       case Prayer.isha:
-  //         prayerName = "Isha";
-  //         prayerTime = prayers.isha;
-  //       case Prayer.sunrise:
-  //         prayerName = "Sunrise";
-  //         prayerTime = prayers.sunrise;
-  //       default:
-  //         throw FormatException('Invalid Date/Time');
-  //     }
-  //   }
+      switch (nextPrayer) {
+        case Prayer.fajr:
+          prayerName = "Fajr";
+          prayerTime = prayers.fajr;
+        case Prayer.dhuhr:
+          prayerName = "Dhuhr";
+          prayerTime = prayers.dhuhr;
+        case Prayer.asr:
+          prayerName = "Asr";
+          prayerTime = prayers.asr;
+        case Prayer.maghrib:
+          prayerName = "Maghrib";
+          prayerTime = prayers.maghrib;
+        case Prayer.isha:
+          prayerName = "Isha";
+          prayerTime = prayers.isha;
+        case Prayer.sunrise:
+          prayerName = "Shuruq";
+          prayerTime = prayers.sunrise;
+        default:
+          throw FormatException('Invalid Date/Time');
+      }
+    }
 
-  //   return (prayerName, prayerTime);
-  // }
+    return (prayerName, prayerTime, isSameDay);
+  }
 
-  // static Future<(String, DateTime)> getCurrentPrayer(PrayerTimes prayers, DateTime currentDateTime) async {
-  //   String? prayerName;
-  //   DateTime? prayerTime;
+  static Future<(String, DateTime)> getCurrentPrayer(PrayerTimes prayers, DateTime currentDateTime) async {
+    String? prayerName;
+    DateTime? prayerTime;
 
-  //   var currentPrayer = prayers.currentPrayerByDateTime(currentDateTime);
+    var currentPrayer = prayers.currentPrayerByDateTime(currentDateTime);
 
-  //   switch (currentPrayer) {
-  //     case Prayer.sunrise:
-  //     case Prayer.fajr:
-  //       prayerName = "Fajr";
-  //       prayerTime = prayers.fajr;
-  //     case Prayer.dhuhr:
-  //       prayerName = "Dhuhr";
-  //       prayerTime = prayers.dhuhr;
-  //     case Prayer.asr:
-  //       prayerName = "Asr";
-  //       prayerTime = prayers.asr;
-  //     case Prayer.maghrib:
-  //       prayerName = "Maghrib";
-  //       prayerTime = prayers.maghrib;
-  //     case Prayer.isha:
-  //       prayerName = "Isha";
-  //       prayerTime = prayers.isha;
-  //     default:
-  //       prayerName = "None";
-  //       prayerTime = DateTime(2000, 1, 1);
-  //   }
+    switch (currentPrayer) {
+      case Prayer.sunrise:
+        prayerName = "Shuruq";
+        prayerTime = prayers.sunrise;
+      case Prayer.fajr:
+        prayerName = "Fajr";
+        prayerTime = prayers.fajr;
+      case Prayer.dhuhr:
+        prayerName = "Dhuhr";
+        prayerTime = prayers.dhuhr;
+      case Prayer.asr:
+        prayerName = "Asr";
+        prayerTime = prayers.asr;
+      case Prayer.maghrib:
+        prayerName = "Maghrib";
+        prayerTime = prayers.maghrib;
+      case Prayer.isha:
+        prayerName = "Isha";
+        prayerTime = prayers.isha;
+      default:
+        prayerName = "None";
+        prayerTime = DateTime(2000, 1, 1);
+    }
 
-  //   return (prayerName, prayerTime);
-  // }
+    return (prayerName, prayerTime);
+  }
 }

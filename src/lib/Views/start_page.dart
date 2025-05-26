@@ -143,7 +143,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Fajr
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[0].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[0].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[0].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[0].isCurrent,
               isNext: viewModel.AllPrayerTimes[0].isNext,
             ),
@@ -151,7 +151,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Sunrise
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[5].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[5].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[5].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[5].isCurrent,
               isNext: viewModel.AllPrayerTimes[5].isNext,
             ),
@@ -159,7 +159,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Dhuhr
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[1].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[1].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[1].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[1].isCurrent,
               isNext: viewModel.AllPrayerTimes[1].isNext,
             ),
@@ -167,7 +167,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Asr
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[2].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[2].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[2].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[2].isCurrent,
               isNext: viewModel.AllPrayerTimes[2].isNext,
             ),
@@ -175,7 +175,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Maghrib
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[3].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[3].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[3].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[3].isCurrent,
               isNext: viewModel.AllPrayerTimes[3].isNext,
             ),
@@ -183,7 +183,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             //Isha
             PrayerDisplayCell(
               prayerName: viewModel.AllPrayerTimes[4].prayerName,
-              prayerTime: viewModel.AllPrayerTimes[4].prayerTime,
+              prayerTime: viewModel.AllPrayerTimes[4].prayerTimeDisplay,
               isCurrent: viewModel.AllPrayerTimes[4].isCurrent,
               isNext: viewModel.AllPrayerTimes[4].isNext,
             ),

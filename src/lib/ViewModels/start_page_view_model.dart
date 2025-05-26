@@ -22,14 +22,18 @@ class StartPageViewModel extends AppViewModel {
   late String CurrentTime;
   String get CurrentDateGregorian => DateFormat('EEEE, MMM d, yyyy').format(_currentDateGregorian);
 
+  DateTime _currentPrayerTime = DateTime.now();
+  String NextPrayerName = "";
+  DateTime NextPrayerTime = DateTime.now().add(10000.milliseconds);
+
   PrayerTimes? PrayTimes;
   List<AppPrayerTime> AllPrayerTimes = [
-    AppPrayerTime(prayerName: "Fajr", prayerTime: DateTime.now(), isCurrent: true, isNext: false),
-    AppPrayerTime(prayerName: "Dhuhr", prayerTime: DateTime.now(), isCurrent: false, isNext: true),
-    AppPrayerTime(prayerName: "Asr", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "Maghrib", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "Isha", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
-    AppPrayerTime(prayerName: "Sunrise", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: true, isNext: false),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: true),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
+    AppPrayerTime(prayerName: "", prayerTime: DateTime.now(), isCurrent: false, isNext: false),
   ];
 
   StartPageViewModel() : super() {
@@ -86,17 +90,95 @@ class StartPageViewModel extends AppViewModel {
       ishaAdjustment: mosque.adjustmentIsha!,
     );
 
-    ////TODO
-    // //Get Next Prayer Time
-    // var (nextPrayerName, nextPrayerTime) = await PrayerTimesHelper.getNextPrayer(PrayTimes!, _currentDateGregorian);
-    // NextPrayerName = nextPrayerName;
-    // NextPrayerTime = nextPrayerTime;
+    //Get Current Prayer at the moment
+    await getCurrentPrayer();
 
+    //Get Next Prayer Time
+    var (nextPrayerName, nextPrayerTime, isSameDay) = await PrayerTimesHelper.getNextPrayer(
+      prayers: PrayTimes!,
+      theDate: _currentDateGregorian,
+      userLat: mosque.latitude!,
+      userLon: mosque.longitude!,
+      prayerCalcMethod: mosque.prayerCalcMethod!,
+      asrCalculationMethod: mosque.asrCalcMethod!,
+      fajrAdjustment: mosque.adjustmentFajr!,
+      sunriseAdjustment: mosque.adjustmentSunrise!,
+      dhuhrAdjustment: mosque.adjustmentDhuhr!,
+      asrAdjustment: mosque.adjustmentAsr!,
+      maghribAdjustment: mosque.adjustmentMaghrib!,
+      ishaAdjustment: mosque.adjustmentIsha!,
+    );
+
+    NextPrayerName = nextPrayerName;
+    NextPrayerTime = nextPrayerTime;
+
+    AllPrayerTimes.clear();
+
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Fajr",
+        prayerTime: PrayTimes!.fajr,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.fajr) == 0,
+        isNext: isSameDay && nextPrayerName == "Fajr",
+      ),
+    );
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Dhuhr",
+        prayerTime: PrayTimes!.dhuhr,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.dhuhr) == 0,
+        isNext: isSameDay && nextPrayerName == "Dhuhr",
+      ),
+    );
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Asr",
+        prayerTime: PrayTimes!.asr,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.asr) == 0,
+        isNext: isSameDay && nextPrayerName == "Asr",
+      ),
+    );
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Maghrib",
+        prayerTime: PrayTimes!.maghrib,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.maghrib) == 0,
+        isNext: isSameDay && nextPrayerName == "Maghrib",
+      ),
+    );
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Isha",
+        prayerTime: PrayTimes!.isha,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.isha) == 0,
+        isNext: isSameDay && nextPrayerName == "Isha",
+      ),
+    );
+    AllPrayerTimes.add(
+      AppPrayerTime(
+        prayerName: "Shuruq",
+        prayerTime: PrayTimes!.sunrise,
+        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.sunrise) == 0,
+        isNext: isSameDay && nextPrayerName == "Shuruq",
+      ),
+    );
+
+    //TODO: Counter
     // try {
     //   countrDownController.dispose();
     // } catch (ex) {}
 
     // countrDownController = CountdownTimerController(endTime: NextPrayerTime.millisecondsSinceEpoch, onEnd: reloadData);
+  }
+
+  Future<void> getCurrentPrayer() async {
+    //Get Current Prayer Time
+    var (currentPrayerName, currentPrayerTime) = await PrayerTimesHelper.getCurrentPrayer(
+      PrayTimes!,
+      _currentDateGregorian,
+    );
+
+    _currentPrayerTime = currentPrayerTime;
   }
 
   void setCurrentTime() {
