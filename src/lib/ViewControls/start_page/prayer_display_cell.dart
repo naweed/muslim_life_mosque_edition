@@ -65,14 +65,6 @@ class PrayerDisplayCell extends StatelessWidget {
                   style: AppStyles.YellowExtraBold28TextStyle.copyWith(
                     color: isNext ? AppColors.LightYellowTextColor : AppColors.LightTextColor,
                   ),
-                  // style: GoogleFonts.openSans(
-                  //   // font-family: 'Open Sans', sans-serif; [cite: 23]
-                  //   fontSize: 36.0, // font-size: 2.25rem; [cite: 23]
-                  //   fontWeight: FontWeight.w700, // font-weight: 700; [cite: 23]
-                  //   color: isNextPrayer
-                  //       ? const Color(0xFFFFECB3) // color [cite: 21]
-                  //       : const Color(0xFFE0E0E0), // color [cite: 23]
-                  // ),
                 ),
                 2.toVerticalSpacer(),
                 Text(

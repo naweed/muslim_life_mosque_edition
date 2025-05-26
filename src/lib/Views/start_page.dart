@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:intl/intl.dart';
+import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
+import 'package:muslim_life_mosque_edition/Framework/Extensions/sized_box_extensions.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/error_indicator.dart';
@@ -12,7 +16,7 @@ class StartPage extends StackedView<StartPageViewModel> {
   late StartPageViewModel pageViewModel;
 
   int itemHorizontalSpacerUnit = 16;
-  int itemVerticalSpacerUnit = 24;
+  int itemVerticalSpacerUnit = 20;
   double itemHorizontalPaddingUnit = 32.0;
   double itemVerticalPaddingUnit = 16.0;
 
@@ -66,7 +70,7 @@ class StartPage extends StackedView<StartPageViewModel> {
         //Mosque Name and Current Time Area
         auto,
         //Spacer
-        itemVerticalSpacerUnit.px,
+        8.px,
         //Prayer Information Area
         1.fr,
         //Spacer
@@ -122,8 +126,9 @@ class StartPage extends StackedView<StartPageViewModel> {
         ).withGridPlacement(columnStart: 1, rowStart: 9),
 
         //Current Date Area
-        Column(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             //Gregorian Date
             Row(
@@ -132,7 +137,7 @@ class StartPage extends StackedView<StartPageViewModel> {
             ),
 
             //Hijri Date
-            Text(viewModel.CurrentDateHijri, style: AppStyles.MediumLight16TextStyle),
+            Text("  |  ${viewModel.CurrentDateHijri}", style: AppStyles.MediumLight20TextStyle),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 5),
 
@@ -195,7 +200,77 @@ class StartPage extends StackedView<StartPageViewModel> {
             ),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 7),
+
+        //Prayer Information Area
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(viewModel.NextPrayerDisplayName1, style: AppStyles.RegularLight18TextStyle),
+                Text(
+                  viewModel.NextPrayerDisplayName2,
+                  style: AppStyles.YellowExtraBold32TextStyle.copyWith(height: 1.2),
+                ),
+                Text(" in", style: AppStyles.RegularLight18TextStyle),
+              ],
+            ),
+            12.toVerticalSpacer(),
+            CountdownTimer(
+              controller: viewModel.countrDownController,
+              //endTime: viewModel.NextPrayerTime.millisecondsSinceEpoch,
+              //onEnd: () async => await viewModel.reloadData(),
+              widgetBuilder: (_, time) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.hours ?? 0) : "00", 'Hour(s)'),
+                  8.toHorizontalSpacer(),
+                  const Text(':', style: AppStyles.YellowExtraBold28TextStyle),
+                  8.toHorizontalSpacer(),
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.min ?? 0) : "00", 'Minute(s)'),
+                  8.toHorizontalSpacer(),
+                  const Text(':', style: AppStyles.YellowExtraBold28TextStyle),
+                  8.toHorizontalSpacer(),
+                  _buildTimerBox(time != null ? NumberFormat("00").format(time.sec ?? 0) : "00", 'Second(s)'),
+                ],
+              ),
+            ),
+          ],
+        ).withGridPlacement(columnStart: 1, rowStart: 3),
       ],
+    );
+  }
+
+  Widget _buildTimerBox(String value, String label) {
+    return Container(
+      width: 96,
+      padding: (8, 12).withSymetricPadding(),
+      decoration: BoxDecoration(
+        color: const Color(0xFF263238).withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(12.0),
+        border: Border.all(color: const Color(0xFF455A64)),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 15.0, offset: const Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(value, style: AppStyles.YellowExtraBold40TextStyle),
+          Text(
+            label,
+            style: AppStyles.MediumLight12TextStyle,
+            // style: GoogleFonts.openSans(
+            //   fontSize: 14.4, // font-size: 0.9rem; [cite: 15]
+            //   textStyle: const TextStyle(
+            //     color: Color(0xFF90A4AE), // color: #90A4AE; [cite: 15]
+            //   ),
+            // ),
+          ),
+        ],
+      ),
     );
   }
 }

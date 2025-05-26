@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:muslim_life_mosque_edition/Helpers/hijri_date_helper.dart';
 import 'package:muslim_life_mosque_edition/Helpers/prayer_times_helper.dart';
@@ -17,14 +18,19 @@ class StartPageViewModel extends AppViewModel {
   late String mosqueCode;
   late Mosque mosque;
 
+  late CountdownTimerController countrDownController;
+
   late DateTime _currentDateGregorian;
   late String CurrentDateHijri;
   late String CurrentTime;
   String get CurrentDateGregorian => DateFormat('EEEE, MMM d, yyyy').format(_currentDateGregorian);
 
-  DateTime _currentPrayerTime = DateTime.now();
+  String CurrentPrayerName = "";
+  DateTime CurrentPrayerTime = DateTime.now();
   String NextPrayerName = "";
   DateTime NextPrayerTime = DateTime.now().add(10000.milliseconds);
+  String NextPrayerDisplayName1 = "Next Prayer";
+  String NextPrayerDisplayName2 = " ASR ";
 
   PrayerTimes? PrayTimes;
   List<AppPrayerTime> AllPrayerTimes = [
@@ -154,7 +160,7 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Fajr",
         prayerTime: PrayTimes!.fajr,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.fajr) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.fajr) == 0,
         isNext: isSameDay && nextPrayerName == "Fajr",
         iqamaTime: PrayTimes!.fajr.add(mosque.adjustmentFajrIqamah!.minutes),
       ),
@@ -163,7 +169,7 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Dhuhr",
         prayerTime: PrayTimes!.dhuhr,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.dhuhr) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.dhuhr) == 0,
         isNext: isSameDay && nextPrayerName == "Dhuhr",
         iqamaTime: PrayTimes!.dhuhr.add(mosque.adjustmentDhuhrIqamah!.minutes),
       ),
@@ -172,7 +178,7 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Asr",
         prayerTime: PrayTimes!.asr,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.asr) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.asr) == 0,
         isNext: isSameDay && nextPrayerName == "Asr",
         iqamaTime: PrayTimes!.asr.add(mosque.adjustmentAsrIqamah!.minutes),
       ),
@@ -181,7 +187,7 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Maghrib",
         prayerTime: PrayTimes!.maghrib,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.maghrib) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.maghrib) == 0,
         isNext: isSameDay && nextPrayerName == "Maghrib",
         iqamaTime: PrayTimes!.maghrib.add(mosque.adjustmentMaghribIqamah!.minutes),
       ),
@@ -190,7 +196,7 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Isha",
         prayerTime: PrayTimes!.isha,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.isha) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.isha) == 0,
         isNext: isSameDay && nextPrayerName == "Isha",
         iqamaTime: PrayTimes!.isha.add(mosque.adjustmentIshaIqamah!.minutes),
       ),
@@ -199,18 +205,56 @@ class StartPageViewModel extends AppViewModel {
       AppPrayerTime(
         prayerName: "Shuruq",
         prayerTime: PrayTimes!.sunrise,
-        isCurrent: _currentPrayerTime.compareTo(PrayTimes!.sunrise) == 0,
+        isCurrent: CurrentPrayerTime.compareTo(PrayTimes!.sunrise) == 0,
         isNext: isSameDay && nextPrayerName == "Shuruq",
         iqamaTime: PrayTimes!.sunrise,
       ),
     );
 
-    //TODO: Counter
-    // try {
-    //   countrDownController.dispose();
-    // } catch (ex) {}
+    if (!AllPrayerTimes.any((prayer) => prayer.isNext)) {
+      //No Same day prayer
+      NextPrayerDisplayName1 = "Next Prayer (tomorrow)";
+      NextPrayerDisplayName2 = NextPrayerName.toUpperCase();
+    } else if (AllPrayerTimes.any((prayer) => prayer.prayerName == "Shuruq" && prayer.isNext)) {
+      //Shuruq Prayer
+      NextPrayerDisplayName1 = "";
+      NextPrayerDisplayName2 = NextPrayerName.toUpperCase();
+    } else if (AllPrayerTimes.any((prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime))) {
+      //Iqama Times
+      NextPrayerDisplayName1 = "Iqama";
+      NextPrayerDisplayName2 = "";
+      NextPrayerTime = AllPrayerTimes.where(
+        (prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime),
+      ).first.iqamaTime;
+    } else {
+      //Next Adhan Times
+      NextPrayerDisplayName1 = "Next Prayer ";
+      NextPrayerDisplayName2 = NextPrayerName.toUpperCase();
+    }
 
-    // countrDownController = CountdownTimerController(endTime: NextPrayerTime.millisecondsSinceEpoch, onEnd: reloadData);
+    //Set Counter
+    try {
+      countrDownController.dispose();
+    } catch (ex) {}
+
+    countrDownController = CountdownTimerController(endTime: NextPrayerTime.millisecondsSinceEpoch, onEnd: reloadData);
+  }
+
+  Future<void> reloadData() async {
+    Future.delayed(3.seconds, () async {
+      //Load the Mosque Details
+      mosqueCode = await appSettingsService.getMosqueCode();
+      mosque = await appApiService.getMosqueDetails(mosqueCode);
+
+      //Get Curent Date
+      getCurrentDate();
+
+      //Get Today's Prayer Times
+      await getTodaysPrayerTimes();
+
+      //Rebuild the UI
+      rebuildUi();
+    });
   }
 
   Future<void> getCurrentPrayer() async {
@@ -220,7 +264,8 @@ class StartPageViewModel extends AppViewModel {
       _currentDateGregorian,
     );
 
-    _currentPrayerTime = currentPrayerTime;
+    CurrentPrayerTime = currentPrayerTime;
+    CurrentPrayerName = currentPrayerName;
   }
 
   void setCurrentTime() {
