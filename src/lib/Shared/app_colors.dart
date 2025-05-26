@@ -27,5 +27,6 @@ class AppColors {
 
   static const Color TextboxBackgroundColor = Color(0xFFF0F0F0);
 
-  // static const Color TabbarSelectedColor = Color(0xFF33A32E);
+  static const Color PrayerBoxYellowColor = Color(0xFFFFC107);
+  static const Color PrayerBoxDarkColor = Color(0xFF37474F);
 }
