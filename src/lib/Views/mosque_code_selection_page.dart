@@ -9,6 +9,7 @@ import 'package:muslim_life_mosque_edition/Framework/Extensions/widget_extension
 import 'package:muslim_life_mosque_edition/Intents/enter_button_intent.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_assets.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
+import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/page_button.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/mosque_code_selection_page_view_model.dart';
@@ -39,10 +40,9 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         border: Border.all(
-          color:
-              viewModel.otpFocusNodes[index].hasFocus
-                  ? AppColors.ButtonBackgroundColor
-                  : AppColors.ButtonBackgroundColor.withValues(alpha: 0.2),
+          color: viewModel.otpFocusNodes[index].hasFocus
+              ? AppColors.ButtonBackgroundColor
+              : AppColors.ButtonBackgroundColor.withValues(alpha: 0.2),
           width: viewModel.otpFocusNodes[index].hasFocus ? 2.0 : 1.0,
         ),
         borderRadius: BorderRadius.circular(5),
@@ -127,8 +127,9 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
                   padding: 8.withAllPadding(),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color:
-                          viewModel.continueButtonFocus.hasFocus ? AppColors.ButtonBackgroundColor : Colors.transparent,
+                      color: viewModel.continueButtonFocus.hasFocus
+                          ? AppColors.ButtonBackgroundColor
+                          : Colors.transparent,
                       width: viewModel.continueButtonFocus.hasFocus ? 2.0 : 1.0,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -146,6 +147,12 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
                       ),
                     ),
                   ),
+                ),
+                24.toVerticalSpacer(),
+                Text(
+                  "This app is 100% Free. If you have been charged for it, please contact us at ${AppConstants.SupportEmailAddress}.",
+                  textAlign: TextAlign.center,
+                  style: AppStyles.MediumLight14TextStyle.copyWith(color: Colors.red),
                 ),
               ],
             ).expandWidget(),
