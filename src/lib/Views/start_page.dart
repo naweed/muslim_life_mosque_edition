@@ -11,6 +11,7 @@ import 'package:muslim_life_mosque_edition/ViewControls/shared/error_indicator.d
 import 'package:muslim_life_mosque_edition/ViewControls/shared/loading_indicator.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/start_page/prayer_display_cell.dart';
 import 'package:muslim_life_mosque_edition/ViewModels/start_page_view_model.dart';
+import 'package:shadex/shadex.dart';
 import 'package:stacked/stacked.dart';
 
 class StartPage extends StackedView<StartPageViewModel> {
@@ -99,8 +100,12 @@ class StartPage extends StackedView<StartPageViewModel> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(AppAssets.AppLogo, height: 54),
-                2.toHorizontalSpacer(),
+                Shadex(
+                  shadowColor: AppColors.DarkAppColor,
+                  shadowBlurRadius: 20,
+                  child: Image.asset(AppAssets.AppLogo, height: 54),
+                ),
+                4.toHorizontalSpacer(),
                 Text(
                   viewModel.mosque.mosqueName!,
                   style: AppStyles.YellowExtraBold36TextStyle,

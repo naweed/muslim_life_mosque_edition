@@ -58,11 +58,12 @@ class MosqueCodeSelectionPageViewModel extends AppViewModel {
 
     //Get the code and check if it is 5 digits
     var mosqueCode =
-        otpControllers[0].text +
-        otpControllers[1].text +
-        otpControllers[2].text +
-        otpControllers[3].text +
-        otpControllers[4].text;
+        (otpControllers[0].text +
+                otpControllers[1].text +
+                otpControllers[2].text +
+                otpControllers[3].text +
+                otpControllers[4].text)
+            .toUpperCase();
 
     if (mosqueCode.length != 5) {
       //Display error toast
