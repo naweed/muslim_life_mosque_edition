@@ -4,6 +4,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:intl/intl.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/padding_extensions.dart';
 import 'package:muslim_life_mosque_edition/Framework/Extensions/sized_box_extensions.dart';
+import 'package:muslim_life_mosque_edition/Shared/app_assets.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_colors.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_styles.dart';
 import 'package:muslim_life_mosque_edition/ViewControls/shared/error_indicator.dart';
@@ -70,7 +71,7 @@ class StartPage extends StackedView<StartPageViewModel> {
         //Mosque Name and Current Time Area
         auto,
         //Spacer
-        itemVerticalPaddingUnit.px,
+        1.px,
         //Prayer Information Area
         1.fr,
         //Spacer
@@ -95,9 +96,19 @@ class StartPage extends StackedView<StartPageViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Mosque Name
-            Text(viewModel.mosque.mosqueName!, style: AppStyles.YellowExtraBold36TextStyle),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(AppAssets.AppLogo, height: 54),
+                2.toHorizontalSpacer(),
+                Text(
+                  viewModel.mosque.mosqueName!,
+                  style: AppStyles.YellowExtraBold36TextStyle,
+                ).withLTRBPadding(0, 0, 0, 4),
+              ],
+            ),
             //Time
-            Text(viewModel.CurrentTime, style: AppStyles.ClockTextStyle),
+            Text(viewModel.CurrentTime, style: AppStyles.ClockTextStyle).withLTRBPadding(0, 2, 0, 0),
           ],
         ).withGridPlacement(columnStart: 1, rowStart: 1),
 
