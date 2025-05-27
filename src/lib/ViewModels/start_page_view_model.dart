@@ -222,7 +222,7 @@ class StartPageViewModel extends AppViewModel {
 
     if (!AllPrayerTimes.any((prayer) => prayer.isNext)) {
       //No Same day prayer
-      NextPrayerDisplayName1 = "Next Prayer (tomorrow)";
+      NextPrayerDisplayName1 = "Next Prayer (tomorrow) ";
       NextPrayerDisplayName2 = NextPrayerName.toUpperCase();
     } else if (AllPrayerTimes.any((prayer) => prayer.prayerName == "Shuruq" && prayer.isNext)) {
       //Shuruq Prayer
@@ -231,7 +231,7 @@ class StartPageViewModel extends AppViewModel {
     } else if (AllPrayerTimes.any((prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime))) {
       //Iqama Times
       NextPrayerDisplayName1 = "";
-      NextPrayerDisplayName2 = "Iqama";
+      NextPrayerDisplayName2 = "Iqama ";
       NextPrayerTime = AllPrayerTimes.where(
         (prayer) => prayer.isCurrent && DateTime.now().isBefore(prayer.iqamaTime),
       ).first.iqamaTime;
