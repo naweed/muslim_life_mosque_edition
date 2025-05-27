@@ -84,7 +84,7 @@ class MosqueCodeSelectionPage extends StackedView<MosqueCodeSelectionPageViewMod
           keyboardType: TextInputType.text,
           textInputAction: index < 4 ? TextInputAction.next : TextInputAction.done,
           decoration: InputDecoration(counterText: '', border: InputBorder.none, contentPadding: 4.withTopPadding()),
-          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[A-Z]'))],
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
           onChanged: (value) => viewModel.handleOtpInput(value, index),
         ),
       ),
