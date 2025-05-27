@@ -83,17 +83,17 @@ flutter:
   
 # flutter_native_splash-production.yaml
 flutter_native_splash:
-  color: "#ECF6F3"
+  color: "#ECE2C2"
   image: assets/images/app_logo.png
   #branding: assets/images/app_brand.png
-  color_dark: "#ECF6F3"
+  color_dark: "#ECE2C2"
   image_dark: assets/images/app_logo.png
   #branding_dark: assets/images/app_brand.png
 
   android_12:
     image: assets/images/app_logo_12.png
-    icon_background_color: "#ECF6F3"
+    icon_background_color: "#ECE2C2"
     image_dark: assets/images/app_logo_12.png
-    icon_background_color_dark: "#ECF6F3"
+    icon_background_color_dark: "#ECE2C2"
 
   web: false
