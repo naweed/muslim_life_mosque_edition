@@ -1,8 +1,8 @@
 name: muslim_life_mosque_edition
 description: "Masjid Pulse"
 publish_to: 'none'
-version: 1.0.4
-# flutter build appbundle --release --build-name=1.0.4 --build-number=4  
+version: 1.0.5
+# flutter build appbundle --release --build-name=1.0.5 --build-number=5  
 
 environment:
   sdk: ^3.8.0
@@ -33,7 +33,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_native_splash: ^2.4.6
 
 flutter:
