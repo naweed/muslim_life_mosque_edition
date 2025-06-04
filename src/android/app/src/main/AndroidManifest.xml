@@ -18,7 +18,7 @@
         android:label="Masjid Pulse"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:banner="@mipmap/banner">
+        android:banner="@drawable/banner">
         <activity
             android:name=".MainActivity"
             android:exported="true"
