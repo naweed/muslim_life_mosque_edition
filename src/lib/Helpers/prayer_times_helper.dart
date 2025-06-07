@@ -175,16 +175,17 @@ class PrayerTimesHelper {
             sunrise: 0 + sunriseAdjustment,
           ),
         ),
-      "London Unified Prayer Timetable" => CalculationMethod.north_america.getParameters().withMethodAdjustments(
-        PrayerAdjustments(
-          fajr: -3 + fajrAdjustment,
-          dhuhr: 6 + dhuhrAdjustment,
-          asr: 3 + asrAdjustment,
-          maghrib: 4 + maghribAdjustment,
-          isha: -2 + ishaAdjustment,
-          sunrise: 0 + sunriseAdjustment,
+      "London Unified Prayer Timetable" =>
+        CalculationMethod.moon_sighting_committee.getParameters().withMethodAdjustments(
+          PrayerAdjustments(
+            fajr: -3 + fajrAdjustment,
+            dhuhr: 5 + dhuhrAdjustment,
+            asr: 0 + asrAdjustment,
+            maghrib: 3 + maghribAdjustment,
+            isha: 5 + ishaAdjustment,
+            sunrise: 0 + sunriseAdjustment,
+          ),
         ),
-      ),
       "custom" => CalculationMethod.other.getParameters().withMethodAdjustments(
         PrayerAdjustments(
           fajr: 0 + fajrAdjustment,
