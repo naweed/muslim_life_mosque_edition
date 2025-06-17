@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lehttp_overrides/lehttp_overrides.dart';
 import 'package:muslim_life_mosque_edition/Services/app_settings_service.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_constants.dart';
 import 'package:muslim_life_mosque_edition/Shared/app_session.dart';
@@ -18,9 +15,6 @@ void main() async {
   //await appSettingsService.clearAllPreferences();
 
   await AppSession.setAppParameters(appSettingsService);
-
-  //Override certificate
-  HttpOverrides.global = LEHttpOverrides();
 
   //Enable Wakelock
   WakelockPlus.enable();
